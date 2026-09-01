@@ -4,8 +4,7 @@
 # ==== OCR 工具数据（tesseract 自带/可重装）====
 tessdata/
 
-# ==== 本地工具配置（skill 会上传，仅排除机器本地的权限设置）====
-.claude/settings.local.json
+# ==== 本地工具配置 ====
 __pycache__/
 
 # ==== 可再生的练习数据库 / 缓存 ====
