@@ -1,0 +1,1089 @@
+
+  --
+
+   1
+   
+
+      
+
+3        2
+        -
+ 
+            SQL
+
+   4
+   
+   
+8 SQL
+
+                  
+
+                       .
+                                 
+
+                
+
+                           Research Center on Intelligent
+                      Computing for Enterprises & Services,
+
+                            Harbin Institute of Technology
+                ?   
+
+
+
+1. 
+2. SQL--
+3. SQL--
+4. 
+5. SQL
+
+
+
+()
+
+
+
+            
+
+           .
+                     
+
+     
+
+               Research Center on Intelligent
+          Computing for Enterprises & Services,
+
+                Harbin Institute of Technology
+       
+(1)?
+
+
+
+(DB Integrity)DBMSDB--
+
+DB
+DBMS
+()
+
+...
+
+
+      
+      
+      
+
+E-R/IDEF1X
+
+
+            
+(2)?
+
+
+
+ 
+
+
+
+ 
+
+ DBMSDB
+
+ DBMS
+
+SQL
+
+DBMS  
+      
+
+         
+
+DBMS
+?
+                         
+(3)
+
+DBMS
+
+ DBMS(SQL-DDL)
+ DBDBMS
+
+
+              
+              
+
+              DBMS DBA
+
+        
+        
+              
+              
+  
+
+  DBMS  DBMS    /
+                DBAP
+  
+                                   
+(3)
+
+()
+
+Integrity Constraint ::= ( OPAR)
+
+      O
+           ()
+
+      P
+      A
+      R
+                       
+(4)
+
+
+
+ 
+     
+     
+
+ 
+     /tabletable
+     
+     
+
+Sage>15 and Sage<=40  6<=Chours/Credit<=7
+      
+(4)
+
+
+
+ 
+     ()
+     ()
+
+ 
+     
+     StudentSage1540
+
+S#   Sage>15 and Sage<=40
+S#
+                                         D#
+                                       Dept
+                
+(4)
+
+
+
+
+     DBSage
+     0150(150)
+
+
+     DB
+     80010008001000
+     1000800
+
+     10001100  SQL
+     1100      
+     1000      
+     
+SQL
+
+                   
+
+                         .
+                                   
+
+                  
+
+                              Research Center on Intelligent
+                         Computing for Enterprises & Services,
+
+                               Harbin Institute of Technology
+SQL                                
+(1)SQL
+                        ()
+ SQL
+                            ()
+ 
+      --                    ()
+      --
+
+ 
+      
+
+                      
+
+Integrity Constraint ::= ( OPAR)
+SQL                   
+(2)SQL-Create Table
+
+Create Table
+
+ CreateTable
+
+ 
+      
+      
+
+CREATE TABLE tablename
+     ( ( colname datatype [ DEFAULT { default_constant | NULL} ]
+
+             [ col_constr {col_constr. . .} ]
+
+       | , table_constr
+
+     {, { colname datatype [DEFAULT { default_constant | NULL} ]
+                   [col_constr {col_constr. . .} ]
+
+          | , table_constr }
+     . . . } );
+SQL                                   
+(2)SQL-Create Table
+
+Col_constr
+
+
+
+{ NOT NULL |                   //
+
+[ CONSTRAINT constraintname ]  //
+
+{ UNIQUE                       //
+
+| PRIMARY KEY                  //
+
+| CHECK (search_cond) //,
+
+| REFERENCES tablename [(colname) ]
+
+                                [ON DELETE { CASCADE | SET NULL } ] } }
+
+      //tablenamecolnameON DELETE CASCADE ON DELETE SET
+      NULLv v 
+      null 
+
+ Col_constrUNIQUE,
+PRIMARY KEYsearch_cond
+
+SQL                   
+(2)SQL-Create Table
+
+
+
+      Create Table Student ( S# char(8) not null unique, Sname char(10),
+                      Ssex char(2) constraint ctssex check (Ssex=`' or
+                      Ssex=`'), Sage integer check (Sage>=1 and Sage<150),
+                      D# char(2) references Dept(D#) on delete cascade,
+                      Sclass char(6) );
+
+       //Ssex{}, 1=<Sage<=150, D#
+SQL                   
+(2)SQL-Create Table
+
+
+
+      Create Table Course ( C# char(3) , Cname char(12), Chours integer,
+                      Credit float(1) constraint ctcredit check (Credit >=0.0 and
+
+                      Credit<=5.0 ), T# char(3) references Teacher(T#) on delete
+
+                      cascade );
+
+      //50
+SQL                                           
+(2)SQL-Create Table
+
+table_constr
+
+
+
+[ CONSTRAINT constraintname ]  //
+
+{ UNIQUE (colname {, colname. . .}) //
+
+| PRIMARY KEY (colname {, colname. . .}) //
+
+| CHECK (search_condition)             //
+                               //
+
+| FOREIGN KEY (colname {, colname. . .})
+
+REFERENCES tablename [(colname {, colname. . .})]
+
+                     [ON DELETE CASCADE] }
+
+                                                             //tablename
+
+ table_constr
+
+SQL                   
+(2)SQL-Create Table
+
+
+
+      Create Table Student ( S# char(8) not null unique, Sname char(10),
+                      Ssex char(2) constraint ctssex check (Ssex=`' or
+                      Ssex=`'), Sage integer check (Sage>1 and Sage<150),
+                      D# char(2) references Dept(D#) on delete cascade,
+
+                Sclass char(6) , primary key(S#) );
+
+Create Table Course ( C# char(3) , Cname char(12), Chours integer,
+               Credit float(1) constraint ctcredit check (Credit >=0.0 and
+               Credit<=5.0 ), T# char(3) references Teacher(T#) on delete
+
+           cascade, primary key(C#),
+
+               constraint ctcc check(Chours/Credit = 20) );
+
+                                 //20
+SQL                   
+(2)SQL-Create Table
+
+
+
+      Create Table SC ( S# char(8), C# char(3),
+                      Score float(1) constraint ctscore check (Score>=0.0 and
+                      Score<=100.0),
+                      forergn key (S#) references student(S#) on delete cascade,
+                      forergn key (C#) references course(C#) on delete cascade );
+SQL                   
+(2)SQL-Create Table
+
+checkSelect-From-WhereWhere
+
+
+
+
+    Create Table SC ( S# char(8) check( S# in (select S# from student)) ,
+                      C# char(3) check( C# in (select C# from course)) ,
+                      Score float(1) constraint ctscore check (Score>=0.0 and
+                      Score<=100.0),
+SQL                   
+(2)SQL-Create Table
+
+ Create Table
+ Alter Table()
+
+      ALTER TABLE tblname
+            [ADD ( { colname datatype [DEFAULT {default_const|NULL} ]
+                        [col_constr {col_constr...} ] | , table_constr }
+                         {, colname ...}) ]
+           [DROP { COLUMN columnname | (columnname {, columnname...})}]
+            [MODIFY ( columnname data-type
+                        [DEFAULT {default_const | NULL } ] [ [ NOT ] NULL ]
+                        {, columnname . . .})]
+            [ADD CONSTRAINT constr_name]
+            [DROP CONSTRAINT constr_name]
+            [DROP PRIMARY KEY ] ;
+SQL                   
+(2)SQL-Create Table
+
+SCctscore()
+
+      Alter Table SC
+            DROP CONSTRAINT ctscore;
+
+SCscore0~150
+Oracle
+
+      Alter Table SC
+            Modify ( Score float(1) constraint nctscore check (Score>=0.0 and
+                      Score<=150.0) );
+
+DBMS,
+
+
+     Alter Table SC
+            Add Constraint nctscore check (Score>=0.0 and Score<=150.0) );
+SQL       
+(3)SQL-
+
+ASSERTION
+
+
+
+SQL
+
+    CREATE ASSERTION <assertion-name> CHECK <predicate>
+
+
+
+
+     ""
+SQL       
+(3)SQL-
+
+
+
+",1000"
+
+   create assertion balance_constraint check
+   (not exists (
+
+       select * from loan
+
+       where not exists (
+              select * from borrower, depositor, account
+              where loan.loan_number = borrower.loan_number
+                 and borrower.customer_name = depositor.customer_name
+                 and depositor.account_number = account.account_number
+                 and account.balance >= 1000)))
+
+borrower(customer_name, loan_number,...) //()
+account(account_number,..., balance) //
+depositor(account_number, customer_name) //()
+loan(loan_number, amount) //
+SQL                                                                     
+(3)SQL-
+
+
+
+""
+
+   create assertion sum_constraint check
+    (not exists (select * from branch
+
+                     where (select sum(amount ) from loan
+                                where loan.branch_name =
+                                         branch.branch_name )
+                               >= (select sum (balance ) from account
+                                where account.branch_name =
+                                         branch.branch_name )))
+
+account(branch_name, account_number,..., balance) //
+loan(branch_name , loan_number, amount,) //
+branch(branch_name, ... ) //
+SQL
+
+                   
+
+                         .
+                                   
+
+                  
+
+                              Research Center on Intelligent
+                         Computing for Enterprises & Services,
+
+                               Harbin Institute of Technology
+SQL                                
+(1)SQL-
+                        ()
+ SQL
+                            ()
+ 
+      --                ()  ()
+      --
+
+ 
+      
+
+                      
+
+Integrity Constraint ::= ( OPAR)
+SQL            
+(2)--Trigger
+
+Trigger
+
+Create Table
+()
+Trigger
+
+Trigger(Create Table),
+
+
+SQL                                                        
+(2)--Trigger
+
+
+
+CREATE TRIGGER trigger_name BEFORE | AFTER
+
+{ INSERT | DELETE | UPDATE [OF colname {, colname...}] }
+
+ON tablename [REFERENCING corr_name_def {, corr_name_def...} ]
+
+[FOR EACH ROW | FOR EACH STATEMENT]
+
+                 //()()
+
+[WHEN (search_condition)]  //
+
+  { statement              //
+
+                     | BEGIN ATOMIC statement; { statement;...} END }
+ Trigger(Before|After),
+(), search_condition,
+
+
+
+corr_name_def
+SQL                      
+(2)--Trigger
+
+BEFORE | AFTER { INSERT | DELETE | UPDATE ...}
+      (Insert, Delete, Update)Before
+     After
+      
+     corr_name_def
+                                                                                        
+
+                BEFORE
+
+                AFTER
+SQL            
+(2)--Trigger
+
+ corr_name_def
+          { OLD [ROW] [AS] old_row_corr_name //
+          | NEW [ROW] [AS] new_row_corr_name //
+          | OLD TABLE [AS] old_table_corr_name //Table
+          | NEW TABLE [AS] new_table_corr_name //Table
+          }
+
+ corr_name_def
+SQL                                                                      
+(3)Trigger
+
+
+
+Teacher, 
+     create trigger teacher_chgsal before update of salary
+          on teacher
+          referencing new x, old y
+          for each row when (x.salary < y.salary)
+                     begin
+          raise_application_error(-20003, 'invalid salary on update');
+
+                                //Oracle
+
+                     end;
+
+Integrity Constraint ::= ( OPAR)
+SQL                                
+(3)Trigger
+
+
+
+student(S#, Sname, SumCourse), SumCourse
+01 
+
+
+     create trigger sumc after insert on sc
+          referencing new row newi
+          for each row
+               begin
+                     update student set SumCourse = SumCourse + 1
+                     where S# = :newi.S# ;
+               end;
+
+Integrity Constraint ::= ( OPAR)
+SQL                                
+(3)Trigger
+
+
+
+student(S#, Sname, Sage, Ssex, Sclass)S#
+9803010199030131, sc
+S#
+
+     create trigger updS# after update of S# on student
+          referencing old oldi, new newi
+          for each row
+               begin
+                     update sc set S# = newi.S# where S# = :oldi.S# ;
+               end;
+
+Integrity Constraint ::= ( OPAR)
+SQL                                
+(3)Trigger
+
+
+
+student(S#, Sname, SumCourse), S#
+
+
+     create trigger delS# after delete on Student
+          referencing old oldi
+          for each row
+               begin
+                     delete sc where S# = :oldi.S# ;
+               end;
+
+Integrity Constraint ::= ( OPAR)
+SQL                                
+(3)Trigger
+
+
+
+student(S#, Sname, SumCourse), S#
+S#
+
+     create trigger delS# after delete on Student
+          referencing old oldi
+          for each row
+               begin
+                     update sc set S# = Null where S# = :oldi.S# ;
+               end;
+
+Integrity Constraint ::= ( OPAR)
+SQL          
+(3)Trigger
+
+
+
+Dept(D#, Dname, Dean), DeanTeacher(T#,
+Tname, D#, Salary)
+
+     create trigger upddean before update of Dean on Dept
+          referencing old oldi, new newi
+          for each row when ( dean not in
+                 (select Tname from Teacher where D# = :newi.D#
+         and salary >=
+                     all (select salary from Teacher where D# = :newi.D#))
+               begin
+          raise_application_error(-20003, 'invalid Dean on update');
+               end;
+
+         Integrity Constraint ::= ( OPAR)
+   ?
+
+         
+
+      .
+                
+
+
+
+          Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+                                       
+
+                           
+
+                             /
+                              
+          
+                             /
+                                 SQL
+                                 
+                                 
+                                  
+            
+
+       
+      
+
+         
+          
+          OPAR
+
+
+           
+
+          .
+                    
+
+   
+
+              Research Center on Intelligent
+        Computing for Enterprises & Services,
+
+              Harbin Institute of Technology
+      
+(1)
+
+
+
+DBMS()
+
+
+
+      
+     
+      /
+      
+     ()
+     : (Top Secret), (Secret),(Confidential)
+     (Unclassified)
+     DBS
+     DBMS
+      
+(2)
+
+DBMS
+
+      (AccessControl)
+           
+
+      
+           
+
+          
+      ()
+
+           
+           ()(
+
+          )
+      ()
+
+          /
+               
+(3)
+
+DBA
+
+ 
+ 
+
+ 
+ DBMSDBA
+DBA
+
+
+     
+      
+        ...?
+
+
+         
+
+      .
+                
+
+
+
+          Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+      
+(1)
+
+
+
+ 
+DBADBA
+; 
+()
+
+
+      
+      
+                          
+(2)DBMS
+
+DBMS
+
+ DBMS(SQL-DCL)
+ DBDBMS
+
+
+               
+               
+
+               DBMS DBA
+
+        
+
+          
+  
+         
+
+               /
+               DBAP
+  DBMS   DBMS
+
+  
+      
+(2)
+
+DBMS()
+
+
+   AccessRule ::= ( S, O, t, P)
+
+           S: ()
+           O: 
+           t: 
+           P: 
+      { AccessRule
+     DB;
+      
+      (Object granularity)://
+     
+      
+      
+               
+(3)
+
+
+
+     Employee(P#, Pname, Page, Psex, Psalary, D#, HEAD)
+
+
+      
+      
+     
+      
+     
+      
+      
+
+     
+     
+
+        ...?
+      
+(3)
+
+
+ 
+ 
+
+     
+     ...?
+      
+(4)
+
+1
+
+
+SQL(Select-From-Where),
+
+                               
+(4)
+
+2
+
+ 
+ ,
+
+      1CreateEmpV1as select*fromEmployee
+      2CreateEmpV2as selectPname,D#fromEmployee
+ 
+
+
+      1 CreateEmpV3asselect*fromEmployeewhereP#
+
+     =:UserId
+      2 CreateEmpV4asselect*fromEmployeewhere
+
+     Head=:UserId
+ 
+
+
+
+AccessRule ::= ( S, O, t, P)
+SQL
+
+                 
+
+                      .
+                                
+
+               
+
+                           Research Center on Intelligent
+                     Computing for Enterprises & Services,
+
+                           Harbin Institute of Technology
+SQL      
+(1)SQL
+
+SQLDDL,DMLDCLDCL
+---
+
+()  ()  (DBA)
+ (1)Select : (DB, Table, Record, Attribute, ... )
+ (2)Modify : 
+
+      Insert : (, ... )
+      Update : (, ...)
+      Delete : (, ...)
+ (3)Create : ()
+      Create : 
+      Alter : 
+      Drop : 
+ 
+DBMS3
+12
+SQL          
+(2)SQL-DCL
+
+
+
+     GRANT {all PRIVILEGES | privilege {,privilege...}}
+          ON [TABLE] tablename | viewname
+           TO {public | user-id {, user-id...}}
+           [WITH GRANT OPTION];
+
+      user-id DBA
+      public, 
+      privilege
+
+           SELECT | INSERT | UPDATE | DELETE | ALL PRIVILEDGES
+      WITH GRANT OPTION
+SQL          
+(3)SQL-DCL
+
+
+
+Emp0001, Emp0021, Emp2001,
+Emp5001(UserId, P#)
+
+     Grant All Priviledges ON Employee TO Emp2001;
+     Grant SELECT ON EmpV2 TO Emp5001 ;
+     Grant SELECT ON EmpV3 TO public;
+     Grant SELECT ON EmpV4 TO Emp0021;
+ (
+)
+ 
+SQL                                          
+(3)SQL-DCL
+
+
+
+     REVOKE {all privilEges | priv {, priv...} } ON tablename | viewname
+         FROM {public | user {, user...} };
+
+
+
+     revoke select on employee from UserB;
+
+
+         
+
+      .
+                
+
+
+
+          Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+      
+(1)
+
+
+
+ DBADB, 
+     UserA, UserB, UserC, UserD, UserE
+
+ DBA
+     UserA
+
+, 
+ 
+
+     UserAEmployee, UserAEmployee
+
+...
+
+     UserAUserB, userBUserC,
+     
+                           
+(1)
+
+Grant Select ON Employee TO UserB WITH GRANT OPTION;
+Grant Select ON Employee TO UserC WITH GRANT OPTION;
+
+DBA  UserA  UserB  UserC
+            UserE
+
+
+
+ 
+      ()
+      
+     , ...()
+
+ SQL
+
+
+                           
+(1)
+
+DBA  UserA  UserB  UserC
+            UserE
+
+ 
+
+ 
+UserCUserBUserE
+UserBUserE
+                                                                   
+(2)
+
+
+
+ 
+
+             (Top Secret), (Secret),(Confidential)(Unclassified)
+
+ 
+ 
+
+
+
+      S, O, Level(S)>=Level(O)
+
+      S, , Level(S)<=Level(O)
+                                                                               
+                                                                                  ?
+      
+(2)
+
+
+
+ DBMS, 
+      : R(A1: D1, A2: D2, ..., An:Dn)
+      
+          R(A1: D1, C1, A2: D2, C2..., An:Dn, Cn, TC)
+           C1,C2,...,CnD1,D2,...,Dn; TC
+          
+          
+(2)
+
+ , , , 
+
+ (
+)
+
+
+   ?
+
+         
+
+      .
+                
+
+
+
+          Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+                                   
+
+          
+
+                             
+                           GRANT
+                      
+                                  SQL
+                                  
+           SOTP                   
+                                   
+
+     
+     
+
+
+ 
+

@@ -1,0 +1,219 @@
+===== Page 1 =====
+数据库系统之二 “ 数据库语言 · SQL 战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 2 =====
+第 6 讲概览 SQL 语言战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 3 =====
+本讲学习什么 ？ 基本内容 1 · SQL 语言概述 ？ 2 · SQL 语言之 D D L · 定义数据库 3 · SQL 语言之 D M L · 操纵数据库重点与难点 ． SQL-DDL 的基本语句 ： CREATE DATABAS E, CREATE TABLE ． SQL-DM L 的基本语句 ： INSERT, DELETE ， U PDATE, SELECT ． SQL-SELECT 语句的训练 ： 正确表达各种查询需求战德臣教授
+
+===== Page 4 =====
+SQL 语言概述战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 5 =====
+s Q L 语言概述 《 1 ） SQL 语言提出和发展 》 1974 年 ， 由 Boyce 和 Chamber 提出 。 战德臣教授 》 1975 一 1979 年 ， 由 IBM 的 San Jose 研究室在 System R 上首次实现 ， 称为 SequeI SQL （ Structured EngIish QUEry Language) (Structured Query Language) 。 》1986 年 ANSI/ISO 推出 SQL 标准 ： SQL-86 》1989 年 ANSI/ISO 推出 SQL 标准 ： SQL-89 乁准的关系数据 》 1992 年进一步推出了 SQL 标准 ： SQL-92 ， 也称为 SQL2 囗是 SQL 一 89 的超集囗增加了新特性 ， 如新数据类型 ， 更丰富数据操作 ， 更强完整性支持等囗原 SQL-89 被称为 entry-SQL, 扩展的被称为 lntermediate 级和 Full 级
+
+===== Page 6 =====
+s Q L 语言概述 《 1 ） SQL 语言提出和发展 》 1999 年进一步推出了 SQL 标准 ： SQL-99 ， 也称为 SQL3 囗对面向对象的一些特征予以支持 ， 支持抽象数据类型囗支持行对象和列对象等囗对递归 、 触发等复杂操作也予以规范化定义囗废弃了 SQL2 的分级 ， 但定义了 core-SQL 及扩展的 SQL >SQL 2003 ， SQL 2006 ， SQL 2008 战德臣教授面向对象数据库对象关系数据库数据库应用程序 》 SQ L 还有一个标准是 SQL X/Open 标准 ， 主要强调各厂商产品的可移植性 ， 只包含被各厂商广泛认可的操作 “ 标准 ' ' 主要用于衡量一个软件商的产品是否符合共同的约定 。 的 “ 标准 ' ' 使得用户可以学习 “ 标准 ' ' 规定的语言 ， 而无需关注具体的软件产的品 。 但也应注意不同软件商的数据库产品满足的标准可能是不一样的 ， 具体应用还是略有差异 。
+
+===== Page 7 =====
+s Q L 语言概述 《 2 ） SQL 语言的功能概述 >SQLiää 是集 DDL 、 D M L 和 D C L 于一体的数据库语言战德臣教授 》 SQL 语言主要由以下 9 个单词弓丨导的操作语句来构成 ， 但每一种语句都能表达复杂的操作请求囗 DDL 语句引导词 ： Create( 建立 ）， Alter Drop （ 修改 ） ， G 散消 ） 模式的定义和删除 ， 包括定义 Database, TabIe, View, lnde × ， 完整性约束条件等 ， 也包括定义对象 （ RowType 行对象 ， Type 列对象 ） 囗 DML 语句引导词 ： lnsert ， DeIete, Update, SeIect / 各种方式的更新与检索操作 ， 如直接输入记录 ， 从其他 TabIe( 由 SubQuery 建立 ） 输入 / 各种复杂条件的检索 ， 如连接查找 ， 模糊查找 ， 分组查找 ， 嵌套查找等 / 各种聚集操作 ， 求平均 、 求和 、 · · · 等 ， 分组聚集 ， 分组过滤等囗 DCL 语句引导词 Grant, Revo ke / 安全性控制 ： 授权和撤消授权 > 交互式 SQL 嵌入式 SQL 砂动态 SQL 等
+
+===== Page 8 =====
+利用 SQL 语言建立数据库战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 9 =====
+利用 s QL 语言建立数据库 《 1 ） 课堂讲义使用的数据库学生选课数据库 S （ T 》 学生学号 S # ， 姓名 Sname, 性别 Ssex, 年龄 Sage, 所属系别 D # ， 班级 ScIass Student （ S# char(8), Sname char(l O), Ssex char(2), Sage integer ， D# char(2), ScIass char(6) 》 战德臣教授 》 院系 ： 系别 D # ， 系名 Dname, 系主任 Dean Dept （ D# char(2), Dname char(l O), Dean Student S# 98030101 98030102 98030103 98040201 98040202 98040203 Sname 张三张四张五王三王四王五 Ssex 男女男男男女 Sage 20 20 20 D# 03 03 03 04 Sclass 980301 980301 980301 980402 980402 980402 char(10) Dept D# 02 03 04 Dname 机电计算机自动控制 SCT Student Dept Dean 李三李四李五李六
+
+===== Page 10 =====
+利用 s QL 语言建立数据库 《 1 ） 课堂讲义使用的数据库 》 课程 ： 课号 C # ， 课名 Cname, 教师编号 T # ， 学时 Chours ， 学分 Credit Course （ C# char(3), Cname char(12), Chours integer ， Credit float(l ), T# char(3) 》 》 教师 ： 教师编号 T # ， 教师名 Tname, 所属院系 D # ， 工资 salary Teacher （ T# char(3), Tname char(10), D# char(2), SaIary fIoat(2) 》 选课 ： 学号 s # ， 课号 c # ， 成绩 score SC （ S# char(8) char(3), Score 战德臣教授后面要反复使用它们 ！ SCT Student Dept Course Teacher SC Course C# 001 003 004 005 002 Cname 数据库数据结构编译原理 C 语言高等数学 Chours 40 40 40 30 80 Credit 6 6 6 001 003 001 003 004 Teacher 001 002 003 004 float(l ） Tname 赵四赵五赵六 D# 03 04 SaIary 1200 ． 00 1400 ． 00 1000 ． 00 1100 ． 00 SC S# 98030101 98030101 9803010 98040202 98040202 98040202 98040203 98030102 98030102 98030102 C# 001 002 003 002 003 001 003 001 002 003 Score 92 85 88 90 80 55 56 54 85 48
+
+===== Page 11 =====
+利用 s QL 语言建立数据库 (2)SQL-DDL 建立数据库战德臣教授 》 包括两件事 ： 定义数据库和表 （ 使用 DDL ） 朐表中追加元组 （ 使用 DML ） 》 DDL: Data Definition Language 囗创建数据库 (DB)—Create Database 先学习简单形式 ！ 囗创建 DB 中的 Table( 定义关系模式 )---Create Table 囗定义 Tab 《 e 及其各个属性的约束条件 《 定义完整性约束 ） 囗定义 View （ 定义外模式及 E ℃ 映像 ） 囗定 Xlndex 、 Tablespace... “ · 等 《 定义物理存储参数 ） 囗上述各种定义的撤消与修正 》 DD L 通常由 DBA 来使用 ， 也有经 DBA 授权后由应用程序员来使用
+
+===== Page 12 =====
+利用 s QL 语言建立数据库 《 3 ） 创建数据库的语句 —create Database 创建 Database 》 数据库 《 Database ） 是若干具有相互关联关系的 Tab 《 e / Re 《 ati 。 n 的集合 》 数据库可以看作是一个集中存放若干 Tab 《 e 的大型文件的简单语法形式 ： 》 create database 数据库名 ； create database 示例 ： 创建课程学习数据库 S （ T SCT SCT; create database 接着就可创建表了 ！ 战德臣教授
+
+===== Page 13 =====
+利用 s QL 语言建立数据库 《 3 ） 创建关系 / 表的语句一 create Table 战德臣教授创建 TabIe 简单语法形式 ： 》 create table 表名 《 列名数据类型 [ Create table Primary key Unique] NO t n [ ， 列名数据类型 [ NO t 刀 u [ ] " 表示其括起的内容可以省略 ， “ 《 ” 表示其隔开的两项可取其一 》 Primary key: 主键约束 。 每个表只能创建一个主键约束 。 》 Unique: 唯一性约束 《 即候选键 ） 。 可以有多个唯一性约束 。 》 Not null: 非空约束 。 是指该列允许不允许有空值出现 ， 如选择了 N 。 t n 表明该列不允许有空值出现 。 》 语法中的数据类型在 SQL 标准中有定义
+
+===== Page 14 =====
+利用 s QL 语言建立数据库 《 3 ） 创建关系 / 表的语句一 create Table 》 在 SQL · 92 标准中定义的数据类型 achar (n) ： 固定长度的字符串 avarchar (n) ： 可变长字符串 ： 整数 / / 有时不同系统也写作 integer 战德臣教授 anumeric (p ， q) ： 固定精度数字 ， 小数点左边 p 位 ， 右边 p · q 位 ： 浮点精度数字 / / 有时不同系统也写作 f 《 。 at （ n ） ， 小数点后保留 n 位囗 rea 》 旧期 （ 如 2003 · 09 · 12 ） adate ： 时间 （ 如 23 ： 15 ： 003 ） atime 》 现行商用 DB M S 的数据类型有时和上面有些差异 ， 请注意 ； 》 和高级语言的数据类型 ， 总体上是一致的 ， 但也有些差异 。
+
+===== Page 15 =====
+利用 s QL 语言建立数据库 《 3 ） 创建关系 / 表的语句一 create Table 示例 ： 定义学生表 Student C reate TabIe Student （ S# char(8) n ot null ， Ssex char(2), Sage integer ， D# 示例 ： 定义课程表 （ ou rse Create TabIe Course （ C# char(3) Cname 战德臣教授 Sname char(2), char(10), ScIass char(6) char(12), Chours Credit float(l ), 学可自己疋其他的表 ！ char(3) 着可向表中 、 自加元组了 ！ integer ， SCT Student Course Student S# 98030101 98030102 98030103 98040201 98040202 98040203 Sname 张三张四张五王三王四王五 Ssex 男女男男男女 Sage 20 20 20 D# 03 03 03 04 Course Sclass C# 980301 001 980301 003 980301 004 980402 005 980402 002 980402 Cname 数据库数据结构编译原理 C 语言高等数学 Chours 40 40 40 30 80 Credit 6 6 6 001 003 001 003 004
+
+===== Page 16 =====
+利用 s QL 语言建立数据库 (4)SQL-DML 建立数据库战德臣教授 》 包括两件事 ： 定义数据库和表 （ 使用 DDL ） 朐表中追加元组 （ 使用 DML ） 》 DML: Data ManipuIation Language 囗向 Tab 《 e 中追加新的元组 ： lnsert 囗修改 Tab 《 e 中某些元组中的某些属性的值 ： Update 囗删除 Tab 《 e 中的某些元组 ： DeIete 囗对 Tab 《 e 中的数据进行各种条件的检索 ： select 》 DM L 通常由用户或应用程序员使用 ， 访问经授权的数据库先学习简单形式 ！
+
+===== Page 17 =====
+利用 s QL 语言建立数据库 （ 5 ） 向表中追加元组的值 -INSERT INTO 向表中追加元组简单语法形式 ： insert intO 表名 [ （ 列名 [ ， 列名 ] · “ ] insert in tO ValL.leS 》 va 《 ues 后面值的排列 ， 须与 int 。 子句后面的列名排列一致战德臣教授 》 若表名后的所有列名省略 ， 则 va 《 ues 后的值的排列 ， 须与该表存储中的列名排列一致
+
+===== Page 18 =====
+利用 s QL 语言建立数据库 （ 5 ） 向表中追加元组的值 -INSERT INTO 示例 ： 追加学生表中的元组 lnsert lnto Student VaIues （ ' 98030101 ， ， ' 张三 ' ， ' 男 ' ， 20 ， ， 03 ， ， 战德臣教授 Student S# 98030101 98030102 98030103 98040201 98040202 ' 980301 ， ); 98040203 张三张四张五王三王四王五 Sage 20 20 20 D# 03 03 03 04 04 04 lnsert lnto Student （ S# ， Sname ， Ssex ， Sage ， D# ， ScIass) VaIues （ ' 98030102 ， ， ' 张四 ， ， ' 女 ' ， 20 ， ， 03 ， ， ' 980301 ， ); 请练习追加元组吧 ！ 示例 ： 追加课程表中的元组 lnsert lnto Course VaIues （ ' 001 ， ， ' 数据库 ' ， 40 ， 6 ， / * 所有列名省略 ， 须与定义或存储的列名顺序一致 / * 如列名未省略 ， 须与语句中列名的顺序一致 lnsert lnto Course(Cname ， C# ， Credit ， Chours ， T#) (' 数据库 ' ， ' 001 ， ， 6 ， 40 ， ℃ 01 ， ); VaIues 据库建立完成口关键是要用呀 ！ Course C# 001 003 004 005 002 Cname 数据库数据结构编译原理 C 语言高等数学 Chours 40 40 40 30 80 Credit Sclass 980301 980301 980301 980402 980402 980402 001 003 001 003 004
+
+===== Page 19 =====
+利用 SQL 语言进行简单查询战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 20 =====
+利用 SQL 语言进行简单查询 《 1 ） 单表查询 -SELECT-FROM-WHERE SQL 提供了结构形式一致但功能多样化的检索语句 Se 《 ect 战德臣教授的简单语法形式 ： >SeIect 列名 [ [ ， 列名 ] · “ ] Select 表名 From 检索条件 ] ； Where 这是最基本的哟 ！ 》 语义 ： 从表名所给出的表中 ， 查询出满足检索条件的元组 ， 并按给定的列名及顺序进行投影显示 。 》 相当于 ： 《 表名 ） ） 列名 ， … ， 列名 《 0 检索条件 >SeIect 语句中的 select 的 ， from... ， where..., 等被称为子句 ， 在以上基本形式基础上会增加许多构成要素 ， 也会增加许多新的子句 ， 满足不同的需求 。
+
+===== Page 21 =====
+利用 SQL 语言进行简单查询 《 1 ） 单表查询 -SELECT-FROM-WHERE 示例 ： 检索学生表中所有学生的信息 SeIect S# ， Sname ， Ssex ， Sage ， ScIass ， D# / / 如投影所有列 ， 则可以用 * 来简写战德臣教授接下来就练习了一 From Student SeIect From Student 示例 ： 检索学生表中所有学生的姓名及年龄 SeIect Sname ， Sage From Student / / 投影出某些列示例 ： 检索学生表中所有年龄小于等于 19 岁的学生的年龄及姓名 SeIect Sage ， Sname From Student Where Sage < = 19 / / 投影的列可以重新排定顺序 Student S# 98030101 98030102 98030103 98040201 98040202 98040203 Sname 张三张四张五王三王四王五 Ssex 男女男男男女 Sage 20 20 20 D# 03 03 03 04 04 04 ScIass 980301 980301 980301 980402 980402 980402
+
+===== Page 22 =====
+利用 SQL 语言进行简单查询罔检索条件 -SELECT-FROM-WHERE 检索条件的书写战德臣教授 》 与选择运算 。 con （ R ） 的条件 c 。 n 书写一样 ， 只是其逻辑运算符用 and ， 0 r ， not 来表示 ， 同时也要注意运算符的优先次序及括弧的使用 。 书写要点是注意对自然语言检索条件的正确理解 。 示例 ： 检索教师表中所有工资少于 1500 元或者工资大于 2000 元井且是 03 系的教师姓名 ？ SeIect From Where SeIect From Where Tname Teacher SaIary < 1500 or SaIary > 2000 and D# = ， 03 ， Tname Teacher (SaIary < 1500 or SaIary > 2000 》 and D# = ， 03 ， 是这样的吗 ？ Teacher T# 001 002 003 004 Tname 赵三赵四赵五赵六 D# 03 03 04 S alary 1200 ． 00 1400 ． 00 1000 ． 00 1100 ． 00
+
+===== Page 23 =====
+利用 SQL 语言进行简单查询罔检索条件 -SELECT-FROM-WHERE 示例 ： 求或者学过 001 号课程 ， 或者学过 002 号课程的学生的学号 SeIect S# From SC Where C# = ℃ 01 ， OR C # = ' 002 ， 示例 ： 求既学过 001 号课程 ， 又学过 002 号课程的学生的学号 ？ SeIect S# From SC Where C# = ℃ 01 ， AND C # = ℃ 02 ， / / 正确的 SQL 语句在讲义后面的示例中讲解 SC S# 98030101 98030101 98030101 98040202 98040202 98040202 98040203 98030102 98030102 98030102 C# 001 002 003 002 003 001 003 001 002 003 战德臣教授 Score 92 88 90 80 56 48
+
+===== Page 24 =====
+利用 SQL 语言进行简单查询 《 3 ） 检索结果之去重复记录 · SELECT DISTINCT FROM-WHERE 结果唯一性问题战德臣教授关系模型不允许出现重复元组 。 但现实 DBMS ， 却允许出现重复元组 ， 但也允许无重复元组 。 》 在 Tab 《 e 中要求无重复元组是通过定义来保证的 ； 而在 Primary key 口 Unique 检索结果中要求无重复元组 ， 是通过保留字的使用来实现的 。 DISTINCT 示例 ： 在选课表中 ， 检索成绩大于 80 分的所有学号 SeIect S# From SC Where Score > 80 / / 有重复元组出现 ， 比如一个同学两门以上课程大于 80 SeIect DISTINCT S# From SC Where Score > 80 / / 重复元组被 D 《 ST 《 NCT 过滤掉 ， 只保留一份其结果差异清楚了吗 ？ 注意有扩展了 · · · SC S# 98030101 98030101 98030101 98040202 98040202 98040202 98040203 98030102 98030102 98030102 C# 001 002 003 002 003 001 003 001 002 003 Score 92 88 90 80 56 54 48
+
+===== Page 25 =====
+利用 SQL 语言进行简单查询 《4） 检索结果之排序 -SELECT-FROM-WHERE-ORDER BY 战德臣教授结果排序问题 DBMS 可以对检索结果进行排序 ， 可以升序排列 ， 也可以降序排列 。 》 Se 《 ect 语句中结果排序是通过增加 order by 子句实现的注意有扩展了一列名 [ aSC 丨 desc] order by 》 意义为检索结果按指定列名进行排序 ， 若后跟 asc 或省略 ， 则为升序 ； 若后跟 desc ， 则为降序 。 》 示例 ： 按学号由小到大的顺序显示出所有学生的学号及姓名 SeIect S# ， Sname From Student Order By S# AS C 》 示例 ： 检索 002 号课大于 80 分的所有同学学号井按成绩由高到低顺序显示 SeIect S# From SC Where C# = ℃ 02 ， and Score > 80 Order By Score DESC
+
+===== Page 26 =====
+利用 SQL 语言进行简单查询 （5） 模糊查询 -SELECT-FROM-WHERE * LIKE * 战德臣教授模糊查询问题比如检索姓张的学生 ， 检索张某某 ； 这类查询问题 ， se 《 ect 语句是通过在检索条件中引入运算符 llke 来表示的 》 含有 《 ike 运算符的表达式注意有扩展了 · · · 列名 [ “ 字符串 ” 冂 0 月 like 》 找出匹配给定字符串的字符串 。 其中给定字符串中可以出现 ％ ， 一等匹配符 · 》 匹配规则 ： 匹配零个或多个字符匹配任意单个字符转义字符 ， 用于去掉一些特殊字符的特定含义 ， 使其被作为普通字符看待 ， 如用 “ \ ％ ” 去匹配字符 ％ ， 用 \ 一去匹配字符
+
+===== Page 27 =====
+利用 SQL 语言进行简单查询 （5） 模糊查询 -SELECT-FROM-WHERE * LIKE * 示例 ： 检索所有姓张的学生学号及姓名 SeIect S# ， Sname From Student Where Sname Like ' 张 ％ ， 示例 ： 检索名字为张某某的所有同学姓名 SeIect Sname From Student Where Sname Like ' 张示例 ： 检索名字不姓张的所有同学姓名 SeIect Sname From Student Where Sname N0t Like ' 张 ％ ， 战德臣教授
+
+===== Page 28 =====
+利用 SQL 语言进行多表联合查询战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 29 =====
+利用 SQL 语言进行多表联合查询 《 1 ） 多表联合查询多表联合查询战德臣教授多表联合检索可以通过连接运算来完成 ， 而连接运算又可以通过广义笛卡尔积后再进选择运算来实现 。 的多表联合检索语句 》 SeIect 列名 [ [ ， 列名 ] · “ ] Select 表名 1 ， 表名 2 ， From 检索条件 ； Where 《 表名 1 × 表名 2 × ...)) 》 相当于列名 ， … ， 列名 《 0 检索条件 11 》 检索条件中要包含连接条件 ， 通过不同的连接条件可以实现等值连接 、 不等值连接及各种 0 · 连接
+
+===== Page 30 =====
+利用 SQL 语言进行多表联合查询 《 2 ） 多表联合查询之连接条件 0 · 连接之等值连接战德臣教授示例 ： 按 “ 001 " 号课成绩由高到低顺序显示所有学生的姓名 （ 二表连接 ） SeIect Sname From Student ， SC 注意连接 Where Student.S# = SC.S# and SC ℃ # = ℃ 01 ， 条件 · ， Order By Score DESC 》 多表连接时 ， 如两个表的属性名相同 ， 则需采用表名 · 属性名方式来限定该属性是属于哪一个表示例 ： 按 ' 数据库 ' 课成绩由高到低顺序显示所有同学姓名 （ 三表连接 ） SeIect Sname From Student ， SC ， Course Where Student.S# = SC.S# and SC ℃ # = Course ℃ # and = ' 数据库 ， Order By Score DESC
+
+===== Page 31 =====
+利用 SQL 语言进行多表联合查询 《 3 ） 表更名与表别名重名之处理战德臣教授 》 连接运算涉及到重名的问题 ， 如两个表中的属性重名 ， 连接的两个表重名 （ 同一表的连接 ） 等 ， 因此需要使用别名以便区分 》 se 《 ect 中采用别名的方式列名 as 列别名 [ [ ， 列名 as 列别名 ] ． “ ] SeIect 表名 1 as 表别名 1 ， 表名 2 as 表别名 2 ， From 检索条件 ； Where 》 上述定义中的 as 可以省略 》 当定义了别名后 ， 在检索条件中可以使用别名来限定属性
+
+===== Page 32 =====
+利用 SQL 语言进行多表联合查询 《 4 ） 不等值连接 0 · 连接之不等值连接 》 示例 ： 求有薪水差额的任意两位教师 SeIect T1.Tname as Teacher1 ， T2.Tname as Teacher2 From Teacher TI ， Teacher T2 Where T1.SaIary > T2.SaIary 》 示例 ： 求年龄有差异的任意两位同学的姓名 SeIect SI .Sname as Stud1 ， S2.Sname as Stud2 From Student SI ， Student S2 Where S1.Sage > S2.Sage 》 请同学书写一下 ： 求 ℃ 01 ' 号课程有成绩差的任意两位同学 》 有时表名很长时 ， 为书写条件简便 ， 也定义表别名 ， 以简化书写战德臣教授
+
+===== Page 33 =====
+利用 SQL 语言进行多表联合查询 （ 5 ） 多表联合查询训练示例 ： 求既学过 “ 001 " 号课又学过 “ 002 " 号课的所有学生的学号 SeIect SI.S# From SC SI ， SC S2 Where SI .S# = S2.S# and SI ℃ # = ℃ 01 ， and S2 ℃ # = ℃ 02 示例 ： 求 “ 001 " 号课成绩比 “ 002 " 号课成绩高的所有学生的学号 SeIect SI.S# From SC SI ， SC S2 Where SI .S# = S2.S# and SI ℃ # = ℃ 01 ， and S2 ℃ # = ℃ 02 ， and S1.Score > S2.Score 特别注意同表的连接条件一 SC 98030101 98030101 98030101 980402 980402m 980402 980501 980301m 980301m 980301m C# 001 002 003 002 003 001 003 001 002 003 Score 92 ， 0 85 ． 0 88 ． 0 90 ． 5 80 ． 0 55 ． 0 56 ， 0 54 ． 0 85 ． 0 48 ． 0 sc S2 98030101 98030101 98030101 980402 980402m 980402 980501 98030102 980301 980301m C# 001 002 003 002 003 001 003 001 002 003 战德臣教授 Score 92 ． 0 85 ． 0 88 ． 0 90 ． 5 80 ． 0 55 ， 0 56 ， 0 54 ． 0 85 ． 0 48 ． 0
+
+===== Page 34 =====
+利用 SQL 语言进行多表联合查询 （ 5 ） 多表联合查询训练 》 注意正确理解用自然语言表达的查询语义 ， 并用 SQL 正确表达 》 示例列出没子过李明老师讲授课程的所有同学的姓名 ？ SeIect Sname From Student S ， SC ， Course C ， Teacher T Where T.Tname < > ' 李明 ' and C ℃ # = SC ℃ # and SC.S# = S.S# and T.T# = C.T# / / 正确的 SQL 语句在讲义后面的示例中讲解确吗 ？ 问题在哪里呢 ？ 战德臣教授
+
+===== Page 35 =====
+利用 SQL 语言进行增 · 删 · 改战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 36 =====
+利用 SQL 语言进行增 · 删 · 改 《 1 ） SQL · 之更新操作 》 元组新增 I n se rt ： 新增一个或一元组到数据库的 Ta b 《 e 中 》 元组更新 Update: 对某些元组中的某些属性值进行重新设定 》 元组删除 Delete ： 删除某些元组 > S Q L- D M L 既能单一记录操作 ， 也能对记录集合进行批更新操作 > SQL-DM L 之更新操作需要利用前面介绍的子查询 （ Subquery ） 的概 ， 以便处理 " 一些 " 、 " 某些 " 等战德臣教授
+
+===== Page 37 =====
+利用 SQL 语言进行增 · 删 · 改 《 2 ） SQL- 之 INSERT 》 元组新增 《 nsert 命令有两种形式 》 单一元组新增命令形式 ： 插入一条指定元组值的元组表名 [ 《 列名 [ ， 列名 ] · insert intO values 》 批数据新增命令形式 ： 插入子查询结果中的若干条元组 。 待插入的元战德臣教授组由子查询给出 。 表名 [ 《 列名 [ ， 列名 ] · insert intO 子查询 ； 要先学好 SeIect...From „,Where
+
+===== Page 38 =====
+利用 SQL 语言进行增 · 删 · 改 《 2 ） SQL- 之 INSERT 示例 ： 单一元组新增 lnsert lnto Teacher ()# ， Tname ， D# ， SaIary) VaIues （ “ 005 ” ， “ 阮小七 ” ， “ 03 ” ， “ 1250 ” ); lnsert lnto Teacher VaIues （ “ 006 ” ， “ 李小虎 " ， “ 03 ” ， “ 950 ” ); 战德臣教授
+
+===== Page 39 =====
+利用 SQL 语言进行增 · 删 · 改 《 2 ） SQL- 之 INSERT 》 示例 ： 批元组新增战德臣教授新建立 TabIe: St(S#, Sname), 将检索到的满足条件的同学新增到该表中 lnsert lnto St ()# ， Sname) SeIect S# ， Sname From Student Where Sname like ' ％ 伟 lnsert lnto St ()# ， Sname) SeIect S# ， Sname From Student Order By Sname ， 》 注意 ： 当新增元组时 ， DBMS 会检查用户定义的完整性约束条件等 ， 如不符合完整性约束条件 ， 则将不会执行新增动作 （ 将在后面介绍 ） 。
+
+===== Page 40 =====
+利用 SQL 语言进行增 · 删 · 改 《 2 ） SQL- 之 INSERT 战德臣教授示例 ： 新建 TabIe: SCt(S#, （ # ， Score), 将检索到的成绩及格同学的记录新增到该表中 lnsert lnto SCt ()# ， C# ， Score) SeIect S# ， C# ， Score From SC Where Score>=60 示例 ： 追加成绩优秀同学的记录 lnsert lnto SCt ()# ， C# ， Score) SeIect S# ， C# ， Score From SC Where Score>=90
+
+===== Page 41 =====
+利用 SQL 语言进行增 · 删 · 改 《 2 ） SQL- 之 INSERT 战德臣教授 》 还可以有更复杂的 " 查询后插入到新表中 " 的语句 ， 例如可以将中间结果存储成表一一一这很有用 ！ 示例 ： 新建 TabIe: St(S#, Sname, avgScore), 将检索到的同学的平均成绩新增到该表中 lnsert lnto St ()# ， Sname ， avgScore) SeIect S# ， Sname ， Avg(Score) From Student ， SC Where Student.S# = SC.S# Group by Student.S# 》 此 SELECT 语句的书写语法后面再解释 。 要先学好 SeIect...From „,Where
+
+===== Page 42 =====
+利用 SQL 语言进行增 · 删 · 改 《 3 ） SQL- 之 DELETE 》 元组删除 De 《 ete 命令 ： 删除满足指定条件的元组条件表达式 ] ， 表名 [ DeIete From Where 》 如果 Where 条件省略 ， 则删除所有的元组示例 ： 删除 S （ 表中所有元组 DeIete From SC 示例 ： 删除 98030101 号同学所选的所有课程 DeIete From SC Where S# = ' 98030101 ， 示例 ： 删除自动控制系的所有同学 DeIete From Student Where D# in _ 咱动控制 ' ); SeIect D# From Dept Where Dname _ 一此是一简单的嵌套子查询 ， 后面会有更详细解释 。 战德臣教授
+
+===== Page 43 =====
+利用 SQL 语言进行增 · 删 · 改 《 3 ） SQL- 之 DELETE 》 还可以有更复杂的 “ 条件控制的删除 " 语句 ， 一这很有用 ！ 示例 ： 删除有四门不及格课程的所有同学 DeIete From Student Where S# in SeIect S# From SC Where Score < 60 Group by S# Having Count(*)>= 4 》 ； 》 此 SELECT 语句的书写语法后面再解释 》 当删除元组时 ， DBMS 会检查用户定义的完整性约束条件等 ， 如不符合完整性约束条件 ， 则将不会执行删除动作要先学好 SeIect...From „,Where 战德臣教授
+
+===== Page 44 =====
+利用 SQL 语言进行增 · 删 · 改 《 4 ） SQL- 之 UPDATE 》 元组更新 Update 命令 ： 用指定要求的值更新指定表中满足指定条件的元组的指定列的值表名 Update 列名 = 表达式 《 《 子查询 ） Set [ [ ， 列名 = 表达式 《 《 子查询月 · 条件表达式 ] ， Where 》 如果 Where 条件省略 ， 则更新所有的元组示例 ： 将所有教师工资上调 5 ％ Update Teacher Set SaIary = SaIary * 1 · 05 示例 ： 将所有计算机系的教师工资上调 10 ％ Update Teacher Set SaIary = SaIary * 1 · 1 Where D# in _ 算机 ' ); SeIect D# From Dept Where Dname _ 战德臣教授
+
+===== Page 45 =====
+利用 SQL 语言进行增 · 删 · 改 《 4 ） SQL- 之 UPDATE Set Score = Score * 1 · 05 战德臣教授 》 还可以有更复杂的 “ 条件控制的更新 " 语句 ， 一这很有用 ！ 示例 ： 当某同学 001 号课的成绩低于该课程平均成绩时 ， 将该同学该门课成绩提高 5 ％ Update SC Where C# = ℃ 01 ， and Score < some SeIect AVG(Score) From SC Where C# = ℃ 01 ， 》 ， 》 此 SELECT 语句的书写语法后面再解释 。 要先学好 SeIect...From „,Where
+
+===== Page 46 =====
+利用 SQL 语言进行增 · 删 · 改 《 4 ） SQL- 之 UPDATE 示例 ： 将张三同学 001 号课的成绩置为其班级该门课的平均成绩 Update SC Set Score = （ SeIect AVG(SC2.Score) From SC SCI ， Student SI ， SC SC2 ， Student S2 Where S1.ScIass = S2.ScIass and SCI .S# = SI .S# and SC2.S# = S2.S# and SI.Sname=' 张三 and SCI ℃ # = ℃ 01 ， and SCI.C# = SC2 ℃ # 》 Where C# = ℃ 01 ， and S# in （ SeIect S# From Student Where Sname = ' 张三 ， 》 》 此 SELECT 语句的书写语法后面再解释 。 战德臣教授
+
+===== Page 47 =====
+利用 SQL 语言修正与撤销数据库战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 48 =====
+利用 SQL 语言修正与撤销数据库 《 1 ） SQL-DDL 之撤销与修改修正数据库 ： 修正数据库的定义 ， 主要是修正表的定义战德臣教授修正基本表的定义 alter table tablename {colname datatype ， “ · } ] [drop { 完整性约束名 } ] modify {colname datatype ， “ · } ] 增加新列删除完整性约束修改列定义示例 ： 在学生表 Student(S#,Sname,Ssex,Sage,D#,ScIass) 基础上增加二列 Saddr, PID AIter TabIe Student Add Saddr char[40], PID char[18] ， 示例 ： 将上例表中 Sna me 列的数据类型增加两个字符 AIter TabIe Student Modify Sname char(10) ， 示例 ： 删除学生姓名必须取唯一值的约束 AIter TabIe Student Drop Unique( Sname 》 ；
+
+===== Page 49 =====
+利用 SQL 语言修正与撤销数据库 《 1 ） SQL-DDL 之撤销与修改撤消基本表表名 drop table 示例 ： 撤消学生表 Student Drop TabIe Student; 示例 ： 撤消教师表 Teacher Drop TabIe Teacher ， 战德臣教授 》 注意 ， SQL 一 de 《 ete 语句只是删除表中的元组 ， 而撤消基本表 d ro p table 的操作是撤消包含表格式 、 表中所有元组 、 由该表导出的视图等相关的所有内容 ， 所以使用要特另刂注意 。 eIete...From— Drop table 的区别清楚了吗 ？
+
+===== Page 50 =====
+利用 SQL 语言修正与撤销数据库 《 1 ） SQL-DDL 之撤销与修改撤消数据库数据库名 ； drop database 示例 ： 撤消 S （ T 数据库 Drop database SCT; 战德臣教授
+
+===== Page 51 =====
+利用 SQL 语言修正与撤销数据库 《 2 ） SQL · DDL 之数据库指定与关闭命令战德臣教授 》 有些 D B M S 提供了操作多个数据库的能力 ， 此时在进行数据库操作时需要指定待操作数据库与关闭数据库的功能 。 指定当前数据库 use 数据库名 ； 关闭当前数据库数据库名 ； close
+
+===== Page 52 =====
+回顾本讲学了什么 ？ 战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 53 =====
+回顾本讲学习了什么 ？ SQL ： 结构化查询语言战德臣教授 Create Database Create TabIe 单表查询多表查询模糊查询结果排序结果去重复条件书写 lnsert... lnto.. Update..Set..Where.. DeIete..From..Where.. SeIect..From..Where..
+
+===== Page 54 =====
+典型 DBMS 交互环境简介 · SQL Server 战德臣哈尔滨工业大学教授博士生导师黑龙江省教学名师教育部大学计算机课程教学指导委员会委员 Research Center on ntelligent C omputing for Enterprises & Services ， Harbin nstitute 0f TechnoIogy
+
+===== Page 55 =====
+典型 DBMS 交互环境简介 · SQL Server (I)SQL server 简介 SQL Server 》 Micr 。 s 。 ft 提供的一款关系数据库管理系统 》 安 *SQL Se rver 井熟悉其操作界面 ． 殺 ， Microsoft SQL Server Management Studio file Edit Vtew Query Project Debug T00 W1ndow Community HeIp 战德臣教授意 ： 菜单 ， 窗口 ， 窗口中的子窗口 ， 右键菜单都有什么 ？ 初步了解一下即可 New Query 」 凿 」 」 」 ' 0 Connect Serv•r ， ． n00 ， Aut.h•nti eati ?assvord. Microsoft• SQL Server2008 R2 D 訃 “ 《 Enein• 以 0 心 SQL S•rver Auth•nti eati on master plorer cal) (SQL Server 10 ， 50 ． 巧 - “ ） Databases 」 System Databases 〔 」 Database Snapshots erTempDB Diagrams ， m Tables Course nS nma Broker ;e Diagrams Options 〉 〉 Ready 0 諦諦的 ； × DECHEN-PC.SCT ． d SQLQueryi.sql - （ “ （ 51 ） 》 / · ． 到 · · · Scnpt for Se1ect 了 op 蕊 RO 3 cormand from 55M5 曰 SELECT 了 OP 1000 [C$ 〗 ， tCnamel ， tChours 1 FROM 〔 5 〕 · tdbo 〕 [ cou ： se 〕 | 」 Re u1t 0 ． 0 帕 [ 囟 《 二 ] 0 的 2 3 4 5 6 闐 2 闐 3 佣 4 佣 5 OS C 」 Sßens Ca 」 0 k Mäh 48 48 48 40 48 刊 1 T02 T03 刊 1 T06 Connect V Re•ember p•ssxord Cuce1 @Query executed 5 以 （ e “ ful Ln 6 № （ (l) （ 10 ， 刃 RTM) 《 “ （ 51 ） | master | 佣 ： 0 | 6 rows Col 28 Ch 28 INS
+
+===== Page 56 =====
+典型 DBMS 交互环境简介 · SQL Server (I)SQL server 简介 SQL Server 的系统数据库是 SQL server 中最重要的系统数据 》 Master ： 库 ， 存储 SQL server 中的元数据 。 模板数据库 ， 在创建新的数据库时 ， SQL server 》 ModeI ： 将会复制此数据库作为新数据库的基础 。 》 Msdb ： 代理服务数据库 ， 提供一个存储空间 。 》 Tempdb ： 临时数据库 ， 为所有的临时表 、 临时存储过程及其他临时操作提供存储空间 ， 断开连接时 ， 临时表与存储过程自动被删除 。 QL Server 衣元成 ， 系统会自动安装 ！ 战德臣教授 ． M 记 roso 仕 SQL Server Management Studio File Edit Vlevv Project Debug Query De Change Type Object Explorer con 髫髫了国 」 闩 0 oca l) (SQL Server 10 ． 50 ． 16 佣 - sa) Databases 闩 」 System Data ba ses 囤 lj master 囤 lj mod el 囤 lj msdb 囤 lj tem pd b 囤 0 Data ba se Snapsh0ts l¯j ReportServer 田 lj ReportServerTempDB 田 lj SCT 田 l.¯j SCTI
+
+===== Page 57 =====
+典型 DBMS 交互环境简介 · SQL Server (I)SQL server 简介 SQL Server 的数据库 》 文件 ： 有三种文件扩展名 ： .mdf 、 .ndf 、 .ldf 一 S 0 战德臣教授 》 主数据库文件 ： 扩展名为 · mdf ， 是存储数据库的启动信息和部分或全部数据 。 一个数据库可以有多个数据库文件 ， 但主数据库文件只有一个 。 》 辅助数据文件 ： 扩展名为 · ndf ， 用于放置主数据库文件中所定义数据库的其它数据 ， 可有多个 。 在数据庞大时 ， 可以帮助存储数据 。 》 日志文件 ： 扩展名 」 df 。 每个数据库至少有一个事务日志文件 。 》 页面 ： 是 SQL server 存储的最小单位 。 一页为 8K 或 8192 字节 。 》 空间 (extent) ： 是 8 个连续的页面 ， 即 64K 数据 ， 是分配数据表存储空间的一种单位 Microsoft SQL Server Management S № 引 0 File Edit Vlew Project Debug Query Designer Tools Winc 0 C 卜 ange Type ， 0bject E № connect• 。 闩囝 (local) (SQL Server 1050 到 16 ” sa) 〔 」 Databases 田 [ 」 System Databases 田 [¯.u Database Snapsh0ts ReportServer 囤 ReportServerTempDB 0 闩 0 曰 0 Ready New Database … New Query Script Database as Tasks policies Facets Start PowerShell Reports Delete Refresh Properties DECHEN•PCSCT 2 003 005 DatabaSe Properties S el e c 段 p 阝 0 0 上 e m № s 匚 h e Track1ng 0 E%tended Fr opertl n LO 《 Shipp1 awner D at 北 a f11e SCT_Iog AJtogrowth Path 匚 〕 、 Pro F 0 s O ft SQL S e es\M1crosoft SQL S@ er \MSSQLI 囗一 5 MSSQLSERVER \MSSQL\DÅIÅ ver \MSSQLI 囗一 51 MSSQLSERVER \MSSQL\DÅTÅ file Name S 匚 mdf 5 匚 T 一 Io ： ldf
+
+===== Page 58 =====
+典型 DBMS 交互环境简介 · SQL Server 《 2 ） 数据库的创建 · 删除与维护创建数据库战德臣教授 》 创建数据库的过程就是为数据库设计名称 、 设计所占用存储空间和存放文件位置的过程 。 特别是在网络数据库中 ， 对数据库的设计显得尤为重要 。 如估计数据可能占用的磁盘空间有多大 ， 日志文件及其他要占用多大空间 。 》 创建数据库的用户自动成为数据库的拥有者 。 Ob'ect Ex lorer 髫 。 了国 」 闩 00 “ l) (SQL Server 1050 ． 16 - sa) New Data ba se.„ Attach.v. Restore Data ba se. el t 紈 page Restore Files a nd FllegroÉGenerd @单五s Filegoups 囤 [ 」 Secu 囤 [ 」 Serv | 」 Repl 〔 」 Ma Start PowerShell Reports Refresh ßscnpt ' lp Database n 訓 Database files. 田 SQL Server Agent SCT <default> Byl umstricted grnth 还 》 吖 nt ， 1 耵 ” tr t growth FieName SCT 3 国 〔 \?rogrum Files\Microsoft SQL 头 “ r LI 的 E Q 灯 Å C 昏 r Fil ” crosoft “ r LIO 釘 E R 庸 L 划灯 Å
+
+===== Page 59 =====
+典型 DBMS 交互环境简介 · SQL Server 《 2 ） 数据库的创建 · 删除与维护创建数据库 》 通过查询分析器或者交互式数据库查询引擎 Microsoft SQL Server Management Studio file 厚 # 軋 \•Gew Project Debug TooIs Window Commu nity Help 一 × SQiQuePæqVaocal).master 2 ） )* Object üplorer 战德臣教授 connect• 髫戇 。 了国 」 闩 （ | 。 （ 动 (SQL Server 思 5016 - sa)•• ' Databases 囤 〔 」 System Databases 《 」 Database Snapshots · j.j RepottServer 田 ReportSenverTemßDB 囤 i.j SCT IJ SCT2 田 0 Securlty Server Objects 〔 」 Replication 囤 」 Management 田 SQL Server Agent Output CREATE DÄTÄBÄ.SE SCT2 ； Messages CO 《 三 nd （ 彐 ） eompleted successfully- Query executed successfully. | (local) （ 10 ， 50 RTM) sa （ 52 〕 《 master | 凹 ： 1 | 0 rows
+
+===== Page 60 =====
+典型 DBMS 交互环境简介 · SQL Server 《 2 ） 数据库的创建 · 删除与维护删除数据库 》 对不再需要的数据库 ， 应删除以释放空间 。 删除的结果将是所有数据库文件都一并被删除 。 》 当数据库处于正在使用或正在恢复状态时 ， 不能删除 。 》 查看数据库的属性 ， 如文件存储位置等战德臣教授 Microsoft SQL Server Mana ement Studio äle Edit View Project Debug Tools Window Community HelF Object Explorer Connect• 髫髫 。 了国 」 曰 (local) (SQL Server 10 ， 50 ， 16 - sa) 闩 [ 」 Data ba ses 田 《 」 System Data bases 田 [ 」 Database Sna pshots 囤 lj ReportServer 囤 lj RepottServerTempDB 田 SCT 田 l.j SCTI lj 囤 0 Secu rity 囤 [ 」 Server 田 [ 」 Replica [ 」 Manag SQL Se Output New Data basem New Query Script Data base a s Tasks Policies Facets Start PowerShell Reports Delete Refresh Properties 一 × SQLQuery2sqI - 0 a Connected ． （ 1 / 1 〕
+
+===== Page 61 =====
+典型 DBMS 交互环境简介 · SQL Server 《 2 ） 数据库的创建 · 删除与维护删除数据库 》 利用查询分析器或交互式数据库引擎删除数据库 、 M i “ 0s0 SQL Server Management Studio file Edit Vlew Query Project Debu g TooIs Window Community HeIp 战德臣教授 mast Object Explorer con nect 髫过了 」 闩囝 0 ocal) (SQL Server 10 巧 16m - sa) 闩 0 Data ba ses 田 」 System Data ba ses 田 」 Data ba se Snapshots 囤 l.j ReportServer ReportServerTem p D B l.j SCT l¯j SCTI 」 Secu rity 囤 0 Server Objects 囤 0 Replication 囤 」 Management 田 SQL Server Ag ent 0 × SQLQueryI.sql - (local).master （ “ （ 52 ） )* DROP DATABASE SCT2 ， Messages CO 耵邑 nd 飞彐 ） 00 耵 leted 彐 ucce 彐彐 fuII y 一
+
+===== Page 62 =====
+典型 DBMS 交互环境简介 · SQL Server 《 2 ） 数据库的创建 · 删除与维护备份数据库 》 备份就是对数据库或事务日志进行备份 。 SQL 的备份是动态的 ， 备份的过程还可以让用户继续改写 。 只有系统管理员 、 数据库的拥有者及数据库的备份者才有权限进行数据备份 。 可以通过企业管理器进行数据库备份 。 卜 i crosoft SQL Server Management Studio File Edit View Project Debug TooIs Wi ndow Commu nity 战德臣教授 HeIp Object ExpIorer con nect - 髫 0 。 了 ， 」 彐 [ 島 (loca l) (SQL Server 10 ． 50 ． 1600 - sa) 闩 Data ba ses 囤 」 System Data bases 〔 ： 」 Data ba se Sna psh0ts 田 ReportServer 囤 ReportServerTempDB [ 」 Secu 田 [ 」 Se 田 《 SQL Output Ready New Data ba New Query Script Data base as Tasks Pol icies Facets Start PowerShell Reports Delete Refresh Properties SQLQueryI.sq 《 - (local).ma ster ()a （ 52 ） ） DROP DÄTABASE SCT2 ， Ta ke 0 矸 | ine Bring Online Shrink Back IJ Restore La unch Data ba se Mirronng Monitorm Ship Tra nsaction Log Generate Scriptsm Extract Data -tier AppI icationm Reg ister as Data-tier Applicationm lmport Data 一 Export Data … Copy Data basem Manage Data base E
+
+===== Page 63 =====
+典型 DBMS 交互环境简介 · SQL Server 《 2 ） 数据库的创建 · 删除与维护备份数据库令完全数据库备份 ： 完全备份数据文件和日志文件 。 战德臣教授令差异备份 （ 增量备份 ） ： 对最近一次数据库备份以来发生的数据变化进行备份 。 这要在完全备份的基础上进行 。 特点是速度快 。 令事务日志备份 ： 对数据库发生的事务进行备份 。 包括从上次进行事务日志备份 、 差异备份和数据库完全备份之后 ， 所有己经完成的事务 。 能尽可能的恢复最新的数据库记录 。 特点是所需磁盘空间小 ， 时间少 。 令数据库文件和文件组备份 ： 用在数据库相当大的情况下 。
+
+===== Page 64 =====
+典型 DBMS 交互环境简介 · SQL Server 《 2 ） 数据库的创建 · 删除与维护恢复数据库 》 数据库的恢复是指将数据库备份加载到系统中的过程 。 在根据数据库备份文件恢复过程中 ， 系统将自动执行安全性检查 、 重建数据库结构及完成填写数据库内容 。 》 数据库的恢复是静态的 。 所以在恢复前 ， 应将需要恢复的数据库访问属性设为单用户 ， 不要让其他用户操作 。 Microsoft SQL Server Ma ement Studio Flle Edit \Gevv Project Debug TooIs Wlndow Community HeIp New i bject Explorer Connect• 髫髫 。 了国 」 闩 (local) (SQL Server 10 巧 0 ． 16m - “ ） 曰 | 」 Databases 《 」 System Databases 囤 《 」 Database Snapshots 囤 ReportServer ReportServerTempDB SCT 0 Secu 田 0 Se { 」 Repli [ 」 Ma SQL Output Ready New New Query Script Database as Tasks policies Facets Start PowerShell Reports Delete Refresh Properties 0 SQLQueryLsql - aocal).master （ 52 ） )* DROP DAIABASE SCT2 ： Take Offline Bring Online Shrink Back lJpm Restore Launch Database Mirroring Monitorm Ship Transaction Generate Scriptsm Extract Data-tier 厶 p 司 i “ on ， “ Register as Data-tier lmport Data … Export Data … Copy Manage Database Encrypüon.„ 战德臣教授 Databasem files and Transaction Log. 》 可以通过企业管理器来完成数据库恢复 。
+
+===== Page 65 =====
+典型 DBMS 交互环境简介 · SQL Server 《 2 ） 数据库的创建 · 删除与维护数据库授权令语法形式 grant 权限 0 n 表名 to 用户名令权限有 ： select ， update ， insert ， delete ， exec ， dri 0 令对被授权的用户 ， 要先成为该数据库的使用者 ， 即要把用户加到数据库里 ， 才战德臣教授 M icrosoft SQL Server Management Studio ， File Edit Vlevv ProJ ect Debu g T00 | s Window Community New Query 」 》 SQLQueryI.sqI - 0 。 DROP DATABASE 能授权 · 0 数据库授权实例令添加用户令对用户授权 Object Explorer con nect 髫 0 。 闩 《 」 Data ba ses 田 [ 」 System Data ba ses 囤 《 」 Data base Snapshots 囤 ReportSer.rer 囤 lj ReportServerTempDB 闩 lj SCT 〔 」 Data ba se Diagrams 曰 《 」 Ta bles 囤 《 」 System TabIes 囤 0 d bo.S 囤 《 0 Views 《 」 Synonym s 田 [ 」 Programmability 囤 [ 」 Service Broker 囤 《 」 Storage 闩 《 」 Secu rity LA dbo 《 0 ； guest 0 ； INFORMATION_SCHEb 0 sys 囤 《 」 Roles 田 《 」 Schemas egrit 。 MeSSageS CO 耵 nd 飞彐 ） ccmp 上后面还要讲的哟 “ dri ， 声明引用完整性 declarative referential 的表来检验其输入的数据 ， 但又不能直接地读取这个表 ， 在这种情况下 ， 用户就需要 DR 《 权限而不是 Se 《 ect 权限 。
+
+===== Page 66 =====
+典型 DBMS 交互环境简介 · SQL Server 《 3 ） 数据表的创建 · 与增 / 删 / 改 / 查创建表战德臣教授 》 同一用户不能建立同一个表名的表 ， 同一表名的表可有多个拥有者 。 但在使用时 ， 需要在这些表上加上所有者的表名 。 》 用 T · SQL 语句创建表 ， 语法形式 ： CREATE TABLE [ 数据库名 · 所有者名 .] 表名 《 { < 列名数据类型 > } [ 缺省值 ] [ 约束 ] [ 是否为空 ] ...) 》 注意 ： T-SQL 是 SQL server 软件的 SQL 语言 ， 与标准版有些差异 。 但标准版 SQL ， 一般情况下 SQL server 软件也都支持示例 ： 应用查询分析器创建表实例 / 在查询分析器中输入 use SCT; / 在查询分析器中输入 Create TabIe Student （ S# char(8) not null ， Sname char(IO), Ssex char(2), Sage integer ， D# char(2), ScIass char(6) ） ； / 在菜单中选择执行查询 ；
+
+===== Page 67 =====
+典型 DBMS 交互环境简介 · SQL Server 《 3 ） 数据表的创建 · 与增 / 删 / 改 / 查示例 ： 应用查询分析器创建表实例战德臣教授 M 记 roso 仕 SQL Server Management Studi0 File Edit Vlew ProJ ect Debu g Tools Object Explorer con 髫 。 了国 」 闩 0 Data ba ses 囤 」 System Data ba ses 」 Data ba se Snapshots 囤 lj Repo nSenver 囤 lj Repo nSenverTem pD B 闩 lj SCT 《 」 Database Diagrams Wlnd0'. 飞 Microsoft SQL Server Management Studio file 《 。 Project Debug Tools 嘶 ow Community Help 0 叫噁艹 · ue 2 ． 呷 - 000D ． SCT （ 52 犷 · 0 CREATE IAELE Cou ： se ()$ chaz （ 钔 Cname cha ： 0 ） ， Chou ： 《 ege ： ， T$ cha ： 飞 ） · 」 connéct• 辑 。 了闩每 0 ab (SQLServer 10 ． 滬 16 ． · “ ： 」 Databases 琶 」 System Databa;es @0 Database Snagzhots 囹 lj ReportServer 的氓破帝 mpDB SkL"QM±aseDiagrams 」 Tables 」 dbo.Course 」 Synonyms 」 Programmability 」 Service Broker 」 Storage 囹 」 Securi#/ 囹 j Ready CO = 过 nd 《 引 00 耳 ． ted 《 = ee 《 《 新 · Tablee 囤 」 d 囤 《 」 View 囤 《 」 Syno 囤 0 Prog 囤 《 」 Servi 田 《 」 Stor New Ta bl e... Fi lter Start PowerShell Repons Refresh @Query executed successfully. 注意操作的次序哟 《 № “ 0 （ 10 RTM) ] sa （ 52 ） ISCT 《 《 0r0
+
+===== Page 68 =====
+典型 DBMS 交互环境简介 · SQL Server 《 3 ） 数据表的创建 · 与增 / 删 / 改 / 查示例 ： 应用查询分析器创建表实例 ． Microsoft SQL Server M anagement Stud ； 0 file Edit vtew Project Debug TabIe Designer TooIs W•ndow Community Help 0 战德臣教授 」 的 0 訇过 0 Object Explorer Connect · 鬯 》 0 了 “ 」 00 （ 动 (SQL Server 10 ． 50 、 16 」 Databases 《 」 System Databases 」 Database Snapsh0ts 田 lj ReportServer @ lj ReportServerTempDB 彐 0 SCT @ 《 」 Database Diagrams 」 Tables 0 0 CrW' 虻 TS CoIumn Properfies 日 (GeneraI) ABow 慵 ． 妇 (GeneraI)eee Data T 、 dar(40) ht dar(4) 0 0 0 dbo ℃ ourse 〔 」 旧 ws @ 《 」 Synonyms @ 《 」 Programmability 0 0 0 0 0 《 」 Service Broker @ 《 」 Storage 」 Security lj SCTI Output Ready
+
+===== Page 69 =====
+典型 DBMS 交互环境简介 · SQL Server 《 3 ） 数据表的创建 · 与增 / 删 / 改 / 查增加 、 修改表字段语法形式 ： ALTER TABLE ADD 《 ALTER 字段名 < 类型 > 战德臣教授示例 ： alter table student add Sadress char(40); alter table student modify Ssex int not null•
+
+===== Page 70 =====
+典型 DBMS 交互环境简介 · SQL Server 《 3 ） 数据表的创建 · 与增 / 删 / 改 / 查创建 、 删除与修改约束令约束是 SQL 提供自动保持数据库完整性的一种方法 ， 共 5 种 。 令用 T · SQL 语句建立约束 ， 语法形式 ： CONSTRAINT 约束名约束类型 《 列名 ） 约束名 ： 在库中应该唯一 ， 如不指定 ， 系统会给出战德臣教授约束类型 《 5 种 ） ： primary key constraint 《 主键值 ） unique constraint 《 唯一性 ） check constraint 《 检查性 ） default constraint 《 默认 ） foreign key constraint 《 外部键 ） 列名 ： 要约束的字段名 》 创建主键约束实例后面还会讲授的一 C reate TabIe Course （ C# char(3) ， Cname char(12), Chours integer ， Credit float(l ), T# char(3) ） constraint pk primary key()# ));
+
+===== Page 71 =====
+典型 DBMS 交互环境简介 · SQL Server 《 3 ） 数据表的创建 · 与增 / 删 / 改 / 查在表中插入数据示例 ： 在查询分析器中输入以下语句 lnsert lnto Student VaIues 《 ' 98030101 ， ， ' 张三 ， ， ' 男 ， ， 20 ， ， 03 ， ， ' 980301 ， ） ； lnsert lnto Student 《 S# ， Sname ， Ssex ， Sage ， D# ， ScIass) VaIues 《 ' 98030102 ， ， ' 张四 ' ， ' 女 ' ， 20 ， ， 03 ， ， ' 980301 ， ） ； lnsert lnto Course VaIues 《 ' 001 ， ， ' 数据库 ' ， 40 ， 6 ， ， 001 ， ） ； lnsert lnto Course(Cname ， C# ， Credit ， Chours ， T# ） VaIues (' 数据库 ' ， ℃ 02 · ， 7 ， 30 ， ℃ 02 ' ） ； 战德臣教授
+
+===== Page 72 =====
+典型 DBMS 交互环境简介 · SQL Server 《 3 ） 数据表的创建 · 与增 / 删 / 改 / 查在表中插入数据 ； Microsoft SQL Server Management Studio file Edit Query Project Debug T001s W•ndow Community Help New Queryj 」 ' 出出凿 」 」 」 0 战德臣教授 。 ！ SCT 0 t Explorer connect• 髫 。 了 ： 」 闩 0 (SQL Server 10 ， 50 ， 16m [ 」 Databases @ 」 System Databases 《 」 Database Snapshots l.j ReportServer ReportSewerTempDB 曰 lj SCT 例 ： 」 Database Diagrams 曰 《 」 Tables 田 0 System Tables 曰 0 dbo.Course E 」 Columns 」 C# (char(4). null) 」 Cname （ ar （ 40 ） ， m 」 Chours Gnt. “ 帅囗 T* (char(4). “ 0 Keys @ 《 」 Constraints Ready × LQue 吖 2 ， 四 《 (10caI)SCT （ “ （ 5 · 曰 INSERT INSERT INSERT INSERT INSERT INSERT 《 1 EO 《 0 ） 《 1 EO 《 过 ， 以 ： 0 《 地 ） ： 0 ； 》 二 VES 0 00 ： ． ， 'DBS' ， ， ． TO 0 ： INTO VALVES 002 ， ， ' 05 ， ， 8 ， ' T02 ， ， ： ： ro 《 竺 VZtJES 俨 003 · ， · CO 耳 ute ： Sys 《 鬯 00 ' ,4S, · T03 ' 》 ： INTO Course VALUES 00 · ， ' lhinking ' ， ， ： ： ro 玉生 VZtJES 俨 005 · ， ' ． ， 0 ， ' 了 050 ： I ： 0 《 0 VALtJES 0006 ， ， 'Engii3h' ,48, ' T060 1 ． Microso 代 SQL Server Management Studio 一课堂讲的 SQL 语言一致的 ！ file Edit '.rtew Project Debug Query Designer Tools %ndow Community Help NewQueryI 」 0 」 爿 ． 一 0 0 . × •DECHEN-PC.SCT dbO ℃ ou 0 affeeted) 过 ！ ze 亡 t d ） 0 Explorer Connect ， 髫 0 了三 № “ 0 (SQL Server 10 ． 50 ． 16 凹彐 《 」 Databases @ 」 System Databases 」 Database Snapshots @ lj ReportServer 」 ReportServerTempDB 三 l.j SCT @ 《 」 Database Diagrams 同 Tables 《 」 System Tables 0 dbo.Course 曰 〔 」 C01umns C# (char(4). nulD 」 cname 化卜 ar （ 40L Chours (int. null) T* @圳4). null) 〔 」 Keys 」 Constraints Ready 0 Cg OS 闐 3 of6' 》 以 》 Tg
+
+===== Page 73 =====
+典型 DBMS 交互环境简介 · SQL Server 《 4 ） 开始 SQL 语言的书写训练吧在查询分析器中输入 SELE （ T · FROM · WHERE 语句井查看查询结果战德臣教授三 《 SCT Object Explorer Microsoft SQL Server Management Studio file Edit Vfiew Query Project Debug TooIs W•ndow Community Help 0 1 0 Execute 》 。 “ ．@园0' 0 × DECHEN-PCSCT - SQLQuery2.sql SELECT · 0 刂曰島 № 儲 0 (SQL Server 10 ． 50 ． 16 - sa) 曰 0 Databases 」 System Databases 0 Database Snapsh0ts l..j ReportServer lj ReportServerTempDB lj SCT @ [ 」 Database Diagrams 闩 」 Tables 田 《 」 System TabIes 彐 」 dbo.Course 闩 」 Columns C# (char(4). null) 」 Cname (char(40). m 訇 Chours null) T# (char(4), null) 」 Keys [ 」 Constraints Ready 」 鼷 u1t Uessages Cho•-rs 43 48 48 40 43 · (10caI).SCT 0 )* 书 SSQL 语句查看执行结果开始练习 SQL 语言吧 ！ 2 3 4 5 6 凹 2 闐 3 佣 5 OS Mdh 刊 1 T02 T03 刊 1 T05 T06 Ln 1 | № c 动 （ 10 ． 50 RTM) | “ （ 52 ） 丨 SCT 《 ： ： | 6 rows Col 22 Ch 22 INS
+

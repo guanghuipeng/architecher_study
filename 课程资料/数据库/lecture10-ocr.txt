@@ -1,0 +1,1221 @@
+
+  --
+
+   1
+   
+
+      
+
+3        2
+        -
+ 
+            SQL
+
+   4
+   
+   
+10 SQLSQL
+
+                 
+
+                      .
+                                
+
+               
+
+                          Research Center on Intelligent
+                     Computing for Enterprises & Services,
+
+                           Harbin Institute of Technology
+               ?   
+
+
+
+1. SQL
+2. SQL
+3. SQL
+4. SQLDA
+5. ODBC/JDBC?
+
+
+
+ SQL
+ 
+ ODBC/JDBC
+SQL
+
+          
+
+       .
+                 
+
+
+
+         Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+SQL                      
+(1)
+
+()SQLDBMSDB
+
+1:             4: SQL   6: 
+                        SQL
+     2:                 
+     
+     SQL
+
+               SQL      7: SQL, 
+                        SQL,
+3: SQL         5: SQL,  
+               SQL      
+               
+                                  8: SQL, 
+     Database                     SQL,
+                                  
+                                  
+SQL                                       
+(2)SQL
+
+SQLSQL
+
+SQL             
+                
+
+SpecName = `';
+
+exec sql select Sno, Sname, Sclass into :vSno, :vSname, :vSclass from
+
+Student where Sname= :SpecName ;         
+                                         
+
+
+exec sql declare cur_student cursor for
+
+               select Sno, Sname, Sclass from Student where Sclass= :vClass
+               order by Sno for read only ; /**/
+      exec sql open cur_student ; /**/
+
+SQLSQL
+
+() SQL(SQL
+
+)
+SQL                                                                    
+(2)SQL
+
+SQL                             SQL
+                                  SQL?
+       #include <stdio.h>
+       exec sql include sqlca;
+
+exec sql begin declare section;
+   char user_name[ ] = "Scott"; char user_pwd[ ] ="tiger";
+
+  char sqltext[ ] = " delete from customers where cid = \`c006\' " ;
+
+exec sql end declare section;
+
+int main()                                                 SQL
+{                                                           
+
+    exec sql whenever sqlerror goto report_error;                     SQL
+    exec sql connect :user_name identified by :user_pwd;               
+
+   exec sql execute immediate :sqltext;                    return 1;
+
+    exec sql commit release; return 0;
+report_error: print_dberror(); exec sql rollback release;
+}
+
+SQLSQL
+
+sqltextDBMSDBMS
+SQL                            
+(2)SQL
+
+SQL
+
+
+
+  Y_N_Y_        ___
+  Y_N _N_       __________
+  Y_N _Y_       035103______     
+                                     SQL?
+       ......
+                              
+                              SQL?
+
+SQL
+()
+
+  SQL
+  
+SQL                                                                              
+(2)SQL
+                 QBEQuery by Example
+?
+                   (See also "")
+
+                         
+
+     ()  ()      ()      (DBMS)    (DBMS)
+
+            QBE     SQL   SQL    
+
+SQL-1
+
+             
+
+             .
+                       
+
+      
+
+                Research Center on Intelligent
+          Computing for Enterprises & Services,
+
+                Harbin Institute of Technology
+SQL-1                                                          
+(1)
+
+Customers(Cid, Cname, City, discnt)
+Customers
+
+Delete customer rows with ALL of the following properties:
+
+Y_N_ Y _ Customer name is Mbale Jamson___
+
+Y_N _N_ Customer is in city ______
+
+Y_N _N_  Customer discount is in range from ______ to ______
+          ...(and so on)
+
+                                               
+     ·charVcname[];                                 SQL?
+     ·charVcity[];
+     ·doublerange_from,range_to;                  ...
+     ·intCname_chose,City_chose,Discnt_chose;
+
+SQL
+SQL-1                                                
+(2)
+
+#include <stdio.h>                                  ------
+#include "prompt.h"
+char Vcname[ ];
+char Vcity[ ];
+double range_from, range_to;
+int Cname_chose, City_chose, Discnt_chose;
+Cname_chose = 0; City_chose = 0; Discnt_chose = 0;
+int sql_sign = 0;
+char continue_sign[ ];
+
+exec sql include sqlca;          ------SQLCA: SQL Communication Area
+
+exec sql begin declare section;
+
+char user_name[20],user_pwd[20];
+char sqltext[ ]="delete from customers where "; ------The Declare Section
+
+exec sql end declare section;
+SQL-1                                                                  
+(2)
+
+int main()                                         ------SQL
+{                                                  ------SQL Connect
+
+    exec sql whenever sqlerror goto report_error;
+    strcpy(user_name, "poneilsql");
+    strcpy(user_pwd, "XXXX");
+    exec sql connect :user_name identified
+
+                by :user_pwd;
+
+while(1) {
+
+memset(Vcname, `\0', 20);
+
+memset(Vcity, `\0', 20);   ------
+
+if (GetCname(Vcname))      ------Cname
+
+Cname_chose = 1;
+
+if (GetCity(Vcity))        ------City
+
+City_chose = 1;
+
+if (GetDiscntRange(&range_from, &range_to))        ------Discnt
+
+Discnt_chose = 1;
+
+Customers(Cid, Cname, City, discnt)
+SQL-1                                                           
+(2)
+                                            
+      if (Cname_chose){                      SQL
+            sql_sign = 1;
+            strcat(sqltext, "Cname = \`");  ------Cnamesqltext
+            strcat(sqltext, Vcname);
+            strcat(sqltext, "\'");          Char
+                                                ?
+       }
+
+if (City_chose){                            ------Citysqltext
+   sql_sign = 1;
+   if(Cname_chose)
+       strcat(sqltext, " and City = \`");
+   else
+        strcat(sqltext, " City = \`");
+   strcat(sqltext, Vcity);
+   strcat(sqltext, "\'");
+
+}
+
+Customers(Cid, Cname, City, discnt)
+SQL-1                                           
+(2)
+
+if (Discnt_chose){                       
+    sql_sign =1;             ?            SQL
+
+   if(Cname_chose=0 and City_chose = 0)
+
+   strcat(sqltext, " discnt >");
+
+   else
+
+   strcat(sqltext, " and (discnt >");    ------Discnt
+                                         sqltext
+   strcat(sqltext, dtoa(range_from));
+
+   strcat(sqltext, " and discnt<");
+
+   strcat(sqltext, dtoa(range_to));
+
+   strcat(sqltext, ")");
+
+}
+
+if(sql_sign){                            -----SQL
+   exec sql execute immediate :sqltext;  ------SQL Commit Work
+   exec sql commit work;
+
+}
+
+Customers(Cid, Cname, City, discnt)
+SQL-1                                                                   
+(2)
+
+    scanf("continue (y/n) %1s", continue_sign)             Disconnect
+    if(continue_sign = "n"){
+
+       exec sql commit release; ------SQL Commit Work and
+       returen 0;
+    }
+   } ------while 
+
+report_error:                  ------SQL Rollback Work and Disconnect
+
+   print_dberror();
+
+   exec sql rollback release;
+
+   return 1;
+
+}  ------main 
+
+   Customers(Cid, Cname, City, discnt)
+SQL-1                                                                    
+(3)SQL
+                      
+
+        Sqltext="delete from customers where "
+                               
+
+             Sqltext=Sqltext+ "Cname= `"+ Vcname + "'"
+
+                                              
+
+                            Sqltext=Sqltext + "City= `"+ Vcity + " ' "
+
+         Sqltext=Sqltext + " and City= `"+ Vcity + " ' "
+
+                                               
+
+Sqltext=Sqltext + "Discnt > "+ dtoa(range_from)
+
+                                          
+SQL-2
+
+            
+
+             .
+                      
+
+      
+
+                Research Center on Intelligent
+          Computing for Enterprises & Services,
+
+                Harbin Institute of Technology
+SQL-2     
+(1)
+
+: SQL
+
+
+
+SQL
+()
+
+    SQL
+    
+SQL-2                                                                  
+(1)
+
+
+
+cbx_id.checked     sle_id.text     cbx_class.checked  sle_class.text
+cbx_name.checked   sle_name.text   cbx_dept.checked   sle_dept.text
+cbx_agest.checked  sle_agest.text  cbx_addr.checked   sle_addr.text
+cbx_sex.checked    sle_ageed.text
+                   sle_sex.text
+
+sle_sqltext.text   . 
+
+                   <>.checked        <> .text
+                       =true        
+                                   
+                    =false 
+SQL-2                                                                                    
+(2)SQL--SQL
+                                                          
+SQL
+                                                                 
+        SQL                                              
+         ?
+                                                  
+                                           Char
+                                               ?  trim()
+                                                  len()
+SQL-2         
+(2)SQL--SQL
+SQL-2                                                                   
+(2)SQL--SQL
+                               
+                                  
+
+                 Integer
+                   ?
+
+                 
+
+            SQL
+             ?
+
+SQL
+SQL-2    
+(3)SQL
+
+1:
+SQL-2                             
+(3)SQL
+
+2:
+
+         SQL
+
+                         
+
+     ()  ()      ()      (DBMS)    (DBMS)
+
+            QBE     SQL   SQL    
+
+SQL
+
+           
+
+          .
+                    
+
+   
+
+             Research Center on Intelligent
+       Computing for Enterprises & Services,
+
+             Harbin Institute of Technology
+SQL                                          
+(1)
+
+SQL  
+       SQL?
+
+SQLhost-variable,
+
+: 
+
+EXEC SQL EXECUTE IMMEDIATE :host-variable;
+
+Prepare-Execute-Using:PREPARE
+
+SQLEXECUTEUSING
+SQL
+
+     EXEC SQL PREPARE sql_temp FROM :host-variable;
+       ......
+
+     EXEC SQL EXECUTE sql_temp USING :cond-variable
+
+                                                                                                         
+                                                                                                    Prepare-Execute-
+                                                                                                     Using?
+SQL   
+(2)
+
+Prepare-Execute-Using
+
+     #include <stdio.h>
+     #include "prompt.h"
+     exec sql include sqlca;
+     exec sql begin declare section;
+
+        char cust_id[5], sqltext[256], user_name[20], user_pwd[10];
+     exec sql end declare section;
+     char cid_prompt[ ] = "Name customer cid to be deleted: ";
+     int main()
+     {
+
+      strcpy(sqltext, "delete from customers where cid = :dcid");
+
+        ......
+
+      while (prompt(cid_prompt, 1, cust_id, 4) >= 0) {
+          exec sql whenever not found goto no_such_cid;
+
+         exec sql prepare delcust from :sqltext; /* prepare statement */
+         exec sql execute delcust using :cust_id; /* using clause ... replaces ":n" above */
+
+        exec sql commit work; continue;
+      no_such_cid: printf("No cust %s in table\n",cust_id);
+
+        continue;
+       }
+       ...
+
+      }
+SQL                                                               
+(2)
+
+
+
+......
+
+strcpy(sqltext, "delete from customers where cid = `C01'");
+
+......
+
+exec sql execute immediate :sqltext;  
+exec sql commit work;                 SQL
+
+                                      ""
+
+......
+
+strcpy(sqltext, "delete from customers where cid = :dcid");
+
+......
+
+exec sql prepare delcust from :sqltext; /* prepare statement */
+
+exec sql execute delcust using :cust_id; /* using clause ... replaces ":n" above */
+
+exec sql commit work;                 
+                                       SQL
+                                      ""
+   SQLDA
+
+         
+
+      .
+                
+
+
+
+          Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+SQLDA                    
+(1)
+
+()SQLDBMSDB
+
+1:             4: SQL   6: 
+                        SQL
+     2:                 
+     
+     SQL
+
+               SQL      7: SQL, 
+                        SQL,
+3: SQL         5: SQL,  
+               SQL      
+               
+                                  8: SQL, 
+     Database                     SQL,
+                                  
+                                  
+SQLDA                 
+(2)
+
+(Data dictionary)(System Catalogs)
+
+
+Create
+,--
+DBMS(DataDictionary(Oracle))(DB2
+UDB)(INFORMIX)(X/Open)
+DBMS,DBA
+,DBASQL
+
+       DBA      DBA
+            DBMS
+             
+       ,
+SQLDA            
+(3)
+
+
+
+
+
+
+
+       
+       SQL
+       
+
+
+
+
+
+
+
+           
+     (//)  
+     
+              
+
+
+SQLDA                                                                    
+(4)
+
+
+
+      
+      
+
+
+
+     Relation_metadata = (relation_name, number_of_attributes,
+                                      storage_organization, location)
+
+     Attribute_metadata = (attribute_name, relation_name, domain_type,
+                                          position, length)
+
+     User_metadata = (user_name, encrypted_password, group)
+     Index_metadata = (index_name, relation_name, index_type,
+
+                                          index_attributes)
+     View_metadata = (view_name, definition)
+SQLDA       
+(5)X/Open
+
+X/OpenInfo_Schem.Tables, 
+
+
+SQL
+
+
+     Select Table_Name From Tables;
+
+
+.
+
+ CreateSchema(
+)CreateTable
+SQLDA                        
+(5)X/Open
+--() 
+
+                     --
+
+                          
+                        .
+            Dbo,
+            
+SQLDA                            
+(6)Oracle
+
+Oracle
+      USER_ :
+      ALL_ :
+      DBA_ :DBA(DBA)
+
+ OracleUSER_Tables,ALL_Tables,
+
+DBA_TablesDBA
+SQLDA                                          
+(6)Oracle
+
+,OracleUSER_TAB_Columns,
+ALL_TAB_Columns(Accessible_Columns),DBA_TAB_ColumnsDBA
+
+
+SQL
+     Select Column_Name From ALL_TAB_Columns
+     Where Table_Name = `STUDENT' ;
+SQLDA       
+(6)Oracle
+
+Oracle
+     TABLE_PRIVILEDGE(ALL_TAB_GRANTS)
+     COLUMN_PRIVILEDGE(ALL_COL_GRANTS)
+          
+     CONSTRAINT_DEFS(ALL_CONSTRAINTS)
+          
+      ... ...
+
+Oracle
+          Select view_name from all_views where owner = `SYS' and
+
+          view_name like `ALL_%' or view_name like `USER_%';
+Oracle,SQL*PLUS
+SQLDA                        
+(7)SQL
+
+
+
+  Y_N _Y_     ___           SQL: 
+  Y_N _N_     __________     
+  Y_N _Y_     035103______
+                                
+      ......
+
+Table, Table
+
+
+
+
+
+TableTable
+
+
+
+                                                                                               SQL:
+                                                                                                
+                                                                                                 
+SQLDA                                                                      
+(8)SQLDA
+                                                  
+SQL                                               
+SQLDA                                              
+
+SQLDA: SQLDescriptorArea,  DBMSSQLDA
+
+SQL
+SQLDA
+
+
+SQLDA
+SQL
+DBMSSQLDA
+
+SQLDA                    
+(9)
+
+1:             4: SQL   6: 
+                        SQL
+     2:                 
+     
+     SQL
+
+               SQL      7: SQL, 
+                        SQL,
+3: SQL         5: SQL,  
+               SQL      
+               
+                                  8: SQL, 
+     Database                     SQL,
+                                  
+                                  
+        ODBC
+
+         
+
+      .
+                
+
+
+
+         Research Center on Intelligent
+   Computing for Enterprises & Services,
+
+         Harbin Institute of Technology
+ODBC       
+(1)ODBC?
+
+ODBCOpen DataBase Connection
+
+ODBC---
+
+
+API()
+ODBC API, 
+
+     
+     SQL
+     
+DBMSDriverODBC
+
+ODBCC,C++, C#, Visual Basic, Power-
+Builder
+ODBC                          
+(1)ODBC?
+
+                Oracle
+                driver
+          SQL
+                     
+                     DBMS
+                     driver
+          
+               MS SQL
+               Server
+               driver
+ODBC       
+(2)ODBC?
+
+ODBCDBMS DriverODBC
+ODBC APIODBC APIDBMS Driver
+DBMS Driver
+
+ODBCSQL
+SQLConnect()SQLConnect()
+:
+
+     connection handle, 
+     the server
+     the user identifier
+     password 
+     SQL_NTS 
+ODBC                            
+(2)ODBC?
+
+  int ODBCexample()
+  {
+
+        RETCODE error; /*  */
+        HENV env; /*  */
+        HDBC conn; /*  */
+        SQLAllocEnv(&env);
+        SQLAllocConnect(env, &conn);
+        //
+        SQLConnect(conn, "aura.bell-labs.com", SQL_NTS,
+        "avi", SQL_NTS, avipasswd", SQL_NTS);
+         //
+
+  { .... Do actual work ... }
+  //
+
+    SQLDisconnect(conn);
+    SQLFreeConnect(conn);
+    SQLFreeEnv(env);
+    //
+  }
+ODBC                 
+(3)ODBC?
+
+SQLExecDirect()SQL
+SQLFetch()
+SQLBindCol()C
+C
+SQLBindCol()
+
+      ODBCstmt,
+      SQLC,.
+      
+
+           ·
+           ·.
+           ·:
+ODBC                                                     
+(3)ODBC?
+
+  char branchname[80]; float balance;
+
+  int lenOut1, lenOut2;
+
+  HSTMT stmt;
+
+  SQLAllocStmt(conn, &stmt);
+
+  //
+
+  char * sqlquery = "select branch_name, sum (balance)
+
+               from account
+
+               group by branch_name";
+
+  error = SQLExecDirect(stmt, sqlquery, SQL_NTS);
+
+  //stmt
+
+  if (error == SQL_SUCCESS) {
+
+  SQLBindCol(stmt, 1, SQL_C_CHAR, branchname , 80, &lenOut1);
+
+  SQLBindCol(stmt, 2, SQL_C_FLOAT, &balance,       0 , &lenOut2);
+
+  //stmt
+
+     while (SQLFetch(stmt) >= SQL_SUCCESS) {
+
+  //
+
+     printf (" %s %g\n", branchname, balance);
+
+     }
+
+  }
+
+  SQLFreeStmt(stmt, SQL_DROP);
+
+  //
+ODBC       
+(4)ODBC?
+
+SQL-
+
+
+      
+     
+, SQL
+     
+
+          SQLSetConnectOption(conn, SQL_AUTOCOMMIT, 0)}
+     
+
+          SQLTransact(conn, SQL_COMMIT) or
+          SQLTransact(conn, SQL_ROLLBACK)
+        JDBC
+
+         
+
+      .
+                
+
+
+
+         Research Center on Intelligent
+   Computing for Enterprises & Services,
+
+         Harbin Institute of Technology
+JDBC       
+(1)JDBC?
+
+JDBCJava DataBase Connection
+JDBCJavaAPIJava
+
+
+JDBC API
+
+JDBCAPI
+Java.sql API --J2SE(Java2)java.sql.DriverManager
+java.sql.Driverjava.sql.Connection
+Javax.sql API--J2EE(Java2)JNDI(Java
+NamingandDirectoryInterface,Java)
+DataSource
+JDBC                                       
+(2)JDBC
+                       DriverManager
+           Java.sql          Driver
+           API
+                         Connection
+            Statement
+                       PreparedStatement  CallableStatement
+
+                          ResultSet
+
+java.sql.DriverManager----
+Java.sql.Driver----
+
+java.sql.Connection----
+Try {...} Catch {...} ----
+JDBC                                       
+(2)JDBC
+                       DriverManager
+           Java.sql          Driver
+           API
+                         Connection
+            Statement
+                       PreparedStatement  CallableStatement
+
+                          ResultSet
+
+java.sql.Statement----SQL
+java.sql.PreparedStatement ---- SQL
+java.sql.CallableStatement ----
+java.sql.ResultSet----SQL
+JDBC          
+(3)JDBC API
+
+
+
+      "Statement"Statement
+      
+
+
+
+DriverDriverManager
+
+      ·Class.forName()
+
+URLConnection, 
+
+      ·DriverManager.getConnection(sDBUrl)
+      ·DriverManager.getConnection(sDBUrl,sDBUserID,sDBPassword)
+
+Statement(PreparedStatementCallableStatement)
+
+
+      ·Statement stmt=con.createStatement()
+
+ResultSet
+
+      ·ResultSet rs=stmt.executeQuery(sSQL)
+JDBC          
+(3)JDBC API
+
+
+
+ public static void JDBCexample(String dbid, String userid, String passwd)
+ { try { //
+
+             Class.forName ("oracle.jdbc.driver.OracleDriver");
+             Connection conn = DriverManager.getConnection(
+
+              "jdbc:oracle:thin:@db.yale.edu:1521:univdb", userid, passwd);
+
+              //
+
+             Statement stmt = conn.createStatement();
+
+              //
+
+                 ... Do Actual Work ....
+
+              //SQL
+
+             stmt.close();
+             conn.close();
+
+              //
+
+         } catch (SQLException sqle) {
+             System.out.println("SQLException : " + sqle); }
+
+ }
+JDBC                                                                    
+(3)JDBC API
+
+ Update to database
+
+  try { stmt.executeUpdate( "insert into instructor values
+                               (`77987', `Kim', `Physics',98000)");
+
+           //
+        } catch (SQLException sqle) {
+
+             System.out.println("Could not insert tuple. " + sqle); }
+
+Execute query and fetch and print results
+
+ResultSet rset = stmt.executeQuery( "select dept_name, avg(salary)"+
+                 " from instructor group by dept_name" );
+
+     while ( rset.next() ) {
+
+          System.out.println(rset.getString("dept_name") + " "
+
+              + rset.getFloat(2)); }
+//SQL"dept_name"2
+""
+JDBC          
+(3)JDBC API
+
+
+
+public static void JDBCexample(String dbid, String userid, String passwd)
+{
+
+    try {
+            Class.forName ("oracle.jdbc.driver.OracleDriver");
+            Connection conn = DriverManager.getConnection( "jdbc:oracle:thin:
+                                  @db.yale.edu:1521:univdb", userid, passwd);
+            Statement stmt = conn.createStatement();
+            try {
+                      stmt.executeUpdate( "insert into instructor values
+                                           (`77987', `Kim', `Physics',98000)");
+                 } catch (SQLException sqle) {
+                      System.out.println("Could not insert tuple. " + sqle);
+                                                           }
+            ResultSet rset = stmt.executeQuery( "select dept_name, avg(salary)"+
+                            " from instructor group by dept_name");
+            while ( rset.next() ) {
+                System.out.println(rset.getString("dept_name") + " " + rset.getFloat(2)); }
+            stmt.close();
+            conn.close();
+           } catch (SQLException sqle) {
+                  System.out.println("SQLException : " + sqle);
+                                                     }
+
+}
+-ODBC-JDBC
+
+             
+
+              .
+                        
+
+       
+
+                 Research Center on Intelligent
+            Computing for Enterprises & Services,
+
+                  Harbin Institute of Technology
+-ODBC-JDBC               
+(1)SQL
+                  SQL
+                  
+                  
+
+                    
+                   fetch
+
+                     
+
+                  
+                  
+
+  SQL
+-ODBC-JDBC                        
+(2)ODBC
+            API
+            
+
+                        SQL
+                        
+                        
+
+                         
+                         
+
+                           fetch
+
+                  
+                 
+                  
+
+     SQL
+
+   SQL
+-ODBC-JDBC                  
+(3)JDBC
+                    
+
+                   
+                    
+
+                   
+                   
+
+                      
+                    
+                    
+                    
+
+                    
+                   
+     SQL            
+               
+             
+             
+
+   SQL
+-ODBC-JDBC                            
+(4)ODBC/JDBC
+
+              
+
+                                
+                                   
+
+                                
+                                 
+
+                
+
+  
+
+  
+   ?
+
+         
+
+      .
+                
+
+
+
+          Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+     ?                        
+
+     SQL
+
+1:   2:          4: SOQDLBC  6: 
+     SQL                        
+                   /JDBC
+               SQL           SQL
+     SQL                     
+
+                                
+
+     SQL       SQL
+
+                             SQL
+
+               SQL
+                    7: SQL, SQL
+                      SQL,
+
+                    
+               5: SQL, 
+3: SQL         SQL 
+
+                           
+                      8: SQL, 
+
+                                 
+                      SQL,
+
+     Database         
+                      
+

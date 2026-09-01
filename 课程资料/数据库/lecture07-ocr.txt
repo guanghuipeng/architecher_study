@@ -1,0 +1,1292 @@
+      
+    ---SQL
+
+         
+
+      .
+                
+
+
+
+         Research Center on Intelligent
+   Computing for Enterprises & Services,
+
+         Harbin Institute of Technology
+7 SQL
+
+              
+
+                .
+                         
+
+         
+
+                   Research Center on Intelligent
+             Computing for Enterprises & Services,
+
+                   Harbin Institute of Technology
+               ?   
+
+
+
+1. SQL
+2. SQL
+3. SQL
+4. SQL
+5. SQL
+
+
+
+SQL-SELECTIN | NOT IN,  some,  all, Exists | NOT Exists
+SQL-SELECTGROUP BY, HAVING
+
+SQL
+
+            (NOT) IN
+
+             
+
+             .
+                       
+
+      
+
+                Research Center on Intelligent
+          Computing for Enterprises & Services,
+
+                Harbin Institute of Technology
+SQL--(NOT) IN        
+(1)
+
+
+
+
+
+ 
+
+               SQL
+               
+                
+     
+ 
+
+
+
+
+
+WhereSelect(subquery) , 
+
+
+
+(NOT) IN--Some/ -All(NOT)
+
+EXISTS
+SQL--(NOT) IN          
+(2) INNOT IN
+
+(NOT) IN
+
+
+
+        [not ] in ()
+
+
+
+
+
+
+      Select * From Student
+      Where Sname in ("", "");
+
+               //
+
+
+
+      Select * From Student
+      Where Sname = "" or Sname = "";
+SQL--(NOT) IN                                                                              
+(2) INNOT IN
+
+001
+
+      Select S#, Sname From Student
+      Where S# in ( Select S# From SC Where C# = `001' ) ;
+
+001, 002
+
+      Select S# From SC
+      Where C# = `001' and
+
+                 S# in ( Select S# From SC Where C# = `002' ) ;
+
+                                                                                      
+                                                                                       ?
+
+                                                          
+                                                         ?
+SQL--(NOT) IN                                                            
+(2) INNOT IN
+
+?
+
+      Select Sname From Student
+      Where S# not in ( Select S# From SC, Course C, Teacher T
+
+                                   Where T.Tname = `' and SC.C# = C.C#
+                                              and T.T# = C.T# );
+
+                                                     C, Teacher T
+      Select Sname From Student S, SC, Course
+      Where T.Tname <> `' and C.C# = SC.C#                    
+                  and SC.S# = S.S# and T.T# = C.T#;             ?
+SQL--(NOT) IN                                       
+(3) 
+
+Select
+
+                                   
+
+Select Sname
+
+From Student                       
+Where S# not in ( Select S#
+
+              From SC, Course C, Teacher T
+              Where T.Tname = `' and SC.C# = C.C#
+
+              and T.T# = C.T# ) ;
+
+
+
+
+ 
+SQL--(NOT) IN                             
+(4) 
+
+
+
+
+ 
+
+001                                    
+                                         ?
+     Select Sname
+      From Student Stud                               
+      Where S# in ( Select S#                         
+
+                              From SC                  
+
+  Where S# = Stud.S# and C# = `001' ) ;
+
+ 
+
+
+SQL
+
+          Some All
+
+             
+
+             .
+                       
+
+      
+
+                Research Center on Intelligent
+          Computing for Enterprises & Services,
+
+                Harbin Institute of Technology
+SQL-- Some All        
+(1)
+
+
+
+
+
+ 
+
+                SQL
+                
+                 
+     
+ 
+
+
+
+
+
+WhereSelect(subquery) , 
+
+
+
+(NOT) IN--Some/ -All(NOT)
+
+EXISTS
+SQL-- Some All                 
+(2)  some /  all
+
+ some /  all
+
+
+
+        some ()               ""
+                              "
+        all ()
+                                 "
+    < , > , >= , <= , = , <>
+
+ 
+
+  
+
+"  some ()"
+  "
+
+  all ()"
+SQL-- Some All     
+(2)  some /  all
+
+
+
+      Select Tname From Teacher
+      Where Salary <= all ( Select Salary From Teacher );
+
+                                                                                      
+                                                                                        ?
+
+001
+
+      Select S# From SC
+      Where C# = "001" and
+
+                 Score < some ( Select Score From SC Where C# = "001" );
+SQL-- Some All                                             
+(2)  some /  all
+
+()
+
+      Select Sname From Student
+      Where 60 > all ( Select Score From SC
+
+                                Where S# = Student.S# );
+
+            
+           ...
+ 001
+ 98030101
+ 
+SQL-- Some All                                                    
+(2)  some /  all
+
+
+
+ 001
+
+Select S# From SC
+
+Where C# = "001" and
+
+        Score >= all ( Select Score From SC Where C# = "001" );
+
+ 98030101                                    
+                                                
+      Select C# From SC
+      Where S# = "98030101" and
+
+        Score <= all ( Select Score From SC Where S# = "98030101" );
+
+ 
+
+Select  C# From SC, Student S                
+Where   Sname = "" and S.S#=SC.S# and         
+        Score <= all ( Select Score From SC
+
+                      Where S#=S.S# );
+SQL-- Some All                                        
+(3) 
+
+  any ?
+
+SQL anyany,""
+  some
+
+ 
+
+Select Tname From Teacher                            
+Where Salary < any ( Select Salary From Teacher );      ?
+
+Select Tname From Teacher
+Where Salary < some ( Select Salary From Teacher );
+
+Select Tname From Teacher
+Where Salary < all ( Select Salary From Teacher );
+SQL-- Some All                                                     
+(3) 
+
+
+
+
+
+        = some ()
+        in ()
+
+
+      Select Sname From Student S
+      Where S# in ( Select S# From SC
+
+                              Where S# = S.S# and C# = `001' ) ;
+
+Select  Sname From Student S                                      <> Some
+Where   S# = some ( Select S# From SC                              not in?
+
+                    Where S# = S.S# and C# = `001' ) ;
+SQL-- Some All                                                                       
+(3) 
+                                                             
+                                                               ?
+
+        not in ()
+        <> some ()
+
+notin
+
+        <> all ()
+
+             Sname From Student S
+             S# not in ( Select S# From SC
+     Select
+      Where              Where S# = S.S# and C# = `001' ) ;
+
+Select Sname From Student S
+Where S# <>some ( Select S# From SC
+
+                        Where S# = S.S# and C# = `001' ) ;
+
+Select Sname From Student S
+ Where S# <> all ( Select S# From SC
+
+                         Where S# = S.S# and C# = `001' ) ;
+SQL
+
+       --(NOT) EXISTS
+
+            
+
+           .
+                     
+
+     
+
+              Research Center on Intelligent
+         Computing for Enterprises & Services,
+
+               Harbin Institute of Technology
+SQL--(NOT) EXISTS        
+(1)
+
+
+
+
+
+ 
+
+                   SQL
+                   
+                    
+     
+ 
+
+
+
+
+
+WhereSelect(subquery) , 
+
+
+
+(NOT) IN--Some/ -All(NOT)
+
+EXISTS
+SQL--(NOT) EXISTS                                                
+(2) EXISTS NOT EXISTS
+
+(NOT) EXISTS 
+
+
+
+         [not] Exists ()
+
+
+
+
+
+     Select DISTINCT Sname From Student
+      Where exists ( Select * From SC, Course, Teacher
+
+                            Where SC.C# = Course.C# and SC. S# = Student.S#
+                                      and Course.T# = Teacher.T# and Tname = `' ) ;
+
+notExists
+
+      Select DISTINCT Sname From Student, SC, Course, Teacher
+      Where SC.C# = Course.C# and SC.S# = Student.S#
+
+                 and Course.T# = Teacher.T# and Tname = `' ) ;
+SQL--(NOT) EXISTS                                                            
+(2) EXISTS NOT EXISTS
+
+notExists
+
+001
+
+Select Sname From Student
+
+Where not exists                        //
+
+( Select * From Course                  //001
+
+Where Course.T# = `001' and not exists  //
+
+( Select * From SC
+
+                             Where S# = Student.S# and C# = Course.C# ) );
+
+001
+
+                                        
+                             ?            ?
+SQL--(NOT) EXISTS                              
+(2) EXISTS NOT EXISTS
+
+
+
+Select Sname From Student
+
+Where not exists                     //
+
+( Select * From Course, SC, Teacher  //
+
+Where Tname=`' and Course.T# =Teacher.T#
+
+and Course.C# = SC.C# and S# = Student.S# );
+SQL--(NOT) EXISTS                                         
+(2) EXISTS NOT EXISTS
+
+98030101
+
+Select DISTINC S# From SC SC1
+
+Where not exists                    //
+
+( Select * From SC SC2              //
+
+Where SC2.S# = `98030101' and not exists //
+
+( Select * From SC
+
+Where C# = SC2.C# and S# = SC1.S# ) );
+
+                                    
+                                 ?    ?
+
+S#, C# (SC)  C#(S#=`98030101'(SC))
+
+{ t[S#] | tSC  (uSC  u[S#]=`98030101')
+                   ((wSC)(w[S#]=t[S#]  w[C#]=u[C#] )) }
+SQL--(NOT) EXISTS                                      
+(2) EXISTS NOT EXISTS
+
+SPJ(Sno, Pno, Jno, Qty), SnoPno
+JnoQtyS1
+
+Select DISTINCT Jno From SPJ SPJ1
+
+Where not exists                                //
+
+( Select * From SPJ SPJ2                        //S1
+
+Where SPJ2.Sno = `S1' and not exists            //
+
+( Select * From SPJ SPJ3
+
+Where SPJ3.Pno = SPJ2.Pno
+
+                  and SPJ3.Jno = SPJ1.Jno ) );
+SQL
+
+                
+
+                    .
+                              
+
+             
+
+                        Research Center on Intelligent
+                  Computing for Enterprises & Services,
+
+                        Harbin Institute of Technology
+SQL   
+(1)
+
+
+
+Select-From-WhereSelect
+
+
+      Select  | expr | agfunc() [[,  | expr | agfunc() ] ... ]
+       From 1 [, 2 ... ]
+
+     [ Where  ] ;
+expr
+DBMS
+agfunc()
+SQL                                                                    
+(1)
+
+(>0)
+
+      Select T1.Tname as TR1, T2.Tname as TR2, T1.Salary - T2.Salary
+      From Teacher T1, Teacher T2
+      Where T1.Salary > T2.Salary;
+
+2015
+
+      Select S.S#, S.Sname, 2015 - S.Sage+1 as Syear
+      From Student S;
+SQL      
+(2)
+
+
+
+SQLagfunc,
+COUNTSUMAVGMAXMIN
+SQL
+
+      
+SQL                                                                          
+(2)
+
+
+
+     Select Sum(Salary) From Teacher;
+
+
+
+     Select Sum(Salary) From Teacher T, Dept
+     Where Dept.Dname = `' and Dept.D# = T.D#;
+
+
+
+     Select AVG(Score) From Course C, SC
+     Where C.Cname = `' and C.C# = SC.C#;
+
+                                                                       
+                                                                         ?
+    SQL
+  
+
+         
+
+      .
+                
+
+
+
+         Research Center on Intelligent
+   Computing for Enterprises & Services,
+
+         Harbin Institute of Technology
+SQL                    
+(1) 
+                    
+                    
+ 
+ 
+
+                  
+                  
+SQL                         
+(2) 
+
+SQL
+
+
+
+ 
+
+Select  | expr | agfunc() [[,  | expr | agfunc() ] ... ]
+
+From 1 [, 2 ... ]
+
+[ Where  ]
+
+     [ Group by  ] ;  SQL
+                      
+                       
+      1, 2, ...
+SQL                                  
+(3) 
+
+ 
+
+     Select S#, AVG(Score) From SC
+     Group by S#;
+
+
+
+
+
+     Select C#, AVG(Score) From SC
+     Group by C#;
+
+
+SQL                                  
+(3) 
+
+
+
+Select S# From SC                
+Where Score < 60 and Count(*)>2  ?
+Group by S#;
+
+//SQL
+SQL    
+(4) 
+
+WhereWhere
+
+
+()/
+
+/
+HavingGroupby
+GroupbyHaving
+
+      Select  | expr | agfunc() [[,  | expr | agfunc() ] ... ]
+       From 1 [, 2 ... ]
+
+     [ Where  ]
+     [ Group by  [ Having ] ] ;
+
+                                                                                
+                                                                                   ...
+SQL                                    
+(5) 
+
+
+
+     Select S# From SC
+     Where Score < 60
+     Group by S# Having Count(*)>2;
+
+10
+
+     Select C# From SC
+     Where Score < 60
+     Group by C# Having Count(*)>10;
+SQL           
+(6) WHERE
+
+HAVINGWHERE
+
+             
+             
+ Having      WHERE
+
+:
+
+Having
+Group by
+
+SQL                                    
+(6) 
+
+
+
+
+
+Select S#, Avg(Score) From SC
+
+Where Score < 60
+
+Group by S# Having Count(*)>2;  
+                                ?
+       //SQL
+
+                                
+                                 ...
+SQL    
+(6) 
+
+
+
+
+
+     Select S#, Avg(Score) From SC
+     Where Score < 60
+     Group by S# Having Count(*)>2;
+
+              //SQL
+
+SQL""
+"" 
+
+     Select S#, Avg(Score) From SC
+     Where S# in
+
+                ( Select S# From SC
+                  Where Score < 60
+                  Group by S# Having Count(*)>2 )
+
+     Group by S# ;
+SQL
+
+              
+
+               .
+                         
+
+        
+
+                  Research Center on Intelligent
+             Computing for Enterprises & Services,
+
+                  Harbin Institute of Technology
+SQL      
+(1) --
+
+SQL UNION, INTERSECT, EXCEPT
+
+
+      { Union [ALL] | Intersect [ALL] | Except [ALL]  }
+ALL
+ALL
+
+1m2n
+
+
+     1 Union ALL 2 m + n
+     1 Intersect ALL 2 min(m,n)
+     1 Except ALL 2 max(0, m - n)
+
+ALL
+ ALL
+SQL                                                      
+(1) --
+
+SQL
+002003
+
+     Select S# From SC Where C# = `002'
+     UNION
+     Select S# From SC Where C# = `003';
+
+ UNION
+     Select S# From SC Where C# = `002' OR C# = `003';
+SQL                                            
+(1) --
+
+ UNION
+
+
+         Customers(CID, Cname, City, Discnt)
+         Agents(AID, Aname, City, Percent)
+
+
+    Select City From Customers
+    UNION
+    Select City From Agents ;
+SQL      
+(1) --
+
+SQL
+002003
+
+     Select S# From SC Where C# = `002'
+     INTERSECT
+     Select S# From SC Where C# = `003';
+ INTERSECT
+     Select S# From SC Where C# = `002' and S# IN
+
+                     (Select S# From SC Where C# = `003');
+ IntersectSQLIntersect SQL
+Intersect
+SQL
+SQL                                        
+(1) --
+
+SQL
+ 002
+
+
+     Select S# From SC Where C# <> `002'
+
+  002
+     Select DISTINCT S# From SC
+     EXCEPT
+     Select S# From SC Where C# = `002';
+SQL      
+(1) --
+
+EXCEPT
+     Select DISTINCT S# From SC SC1
+     Where not exists ( Select * From SC
+               Where C# = `002' and S# = SC1.S#) ;
+
+ExceptSQLExcept SQL
+Except
+SQL
+SQL      
+(1) --
+
+ UNIONEntry-SQL92
+ INTERSECTEXCEPTFull-SQL92
+ Core-SQL99DBMS
+
+SQL    
+(2) 
+
+ 
+ 
+
+ SC,001
+
+ DBMS
+0
+
+
+  ?
+SQL              
+(2) 
+
+ SQLDBMSNull
+
+ 
+
+         is [not ] null
+
+     
+
+
+
+     Select Sname From Student
+     Where Sage is null ;
+ Where Sage = null; 
+
+    
+IS NULL
+
+       = NULL?
+SQL    
+(2) 
+
+ DBMS
+       is[not]null
+       nullnull
+       nullfalseSQL-92
+      unknown
+       nullcount(*)null
+
+
+     Select AVG(Score) From SC;
+     ()73.5 = (92 + 55)/2
+
+
+     Select COUNT(*) From SC;
+     3
+SQL    
+(3) 
+
+
+SQL
+
+      Select  [ [, ] ... ]
+       From 1, 2, ...
+       Where  ;
+
+  , ... , (  (1  2  ...))
+SQL                                               
+(3) 
+
+SQL
+      Select  [ [, ] ... ]
+       From 1 [NATURAL]
+                        [ INNER | { LEFT | RIGHT | FULL} [OUTER]] JOIN 2
+                { ON  | Using (Colname {, Colname ...}) }
+      [ Where  ] ... ;
+
+ 
+
+()                ()
+
+inner join        natural
+left outer join   on <>
+right outer join  using (Col1, Col2, ..., Coln)
+full outer join
+SQL    
+(3) 
+
+ Inner Join: -
+ Left Outer Join, Right Outer Join, Full Outer Join: 
+
+
+      "1 Left Outer Join 2"1t
+     2s, tst
+     
+      "1 Right Outer Join 2"2s
+     1t, tss
+     
+      "1 Full Outer Join 2"
+
+                 ()
+                 inner join
+                 left outer join
+                 right outer join
+                 full outer join
+SQL    
+(3) 
+
+ natural
+      
+     
+
+ on <>
+      
+     
+
+ using (Col1, Col2, ..., Coln)
+      (Col1, Col2, ..., Coln)(Col1,
+     Col2, ..., Coln)(Col1, Col2, ..., Coln)
+SQL    
+(3) 
+
+Inner Join
+
+: ()
+     Select Teacher.T#, Tname, Cname
+      From Teacher Inner Join Course
+               ON Teacher.T# = Course.T#
+     Order by Teacher.T# ASC;
+SQL                                         
+(3) 
+
+Outer Join
+
+: ()
+     Select Teacher. T#, Tname, Cname
+      From Teacher Left Outer Join Course
+               ON Teacher.T# = Course.T#
+     Order by Teacher.T# ASC ;
+   SQL-SELECT
+
+         
+
+      .
+                
+
+
+
+         Research Center on Intelligent
+   Computing for Enterprises & Services,
+
+         Harbin Institute of Technology
+SQL-SELECT                                                  
+(1) SQL-SELECT
+
+                SQL
+
+                      
+                       
+SELECT ..FROM..
+WHERE ..()            UNION                     UNION ALL
+
+                      EXCEPT  EXCEPT ALL
+
+[NOT] IN  some/  all  INTERSECT INTERSECT ALL
+
+[NOT] EXISTS          FROM R, S  FROM R JOIN S  INNER JOIN
+                                                OUTER JOIN
+
+          
+GROUP BY     
+
+GROUP BY..HAVING..
+SQL-SELECT                                                        
+(2) SQL-SELECT
+
+SQL-SELECT
+
+Subquery ::==
+ SELECT [ ALL | DISTINCT ] { * | expr [[AS] c_alias] {, ... } }
+
+   FROM tableref {, ... }
+   [WHERE search_condition]
+   [GROUP BY column {, ... } [HAVING search_condition] ]
+  | subquery [UNION [ALL] | INTERSECT [ALL] | EXCEPT [ALL]]
+
+       [CORRESPONDING [BY] (colname {, ... })] subquery;
+
+Tableref ::== tablename [corr_name]
+
+Select statement ::==
+
+   Subquery [ORDER BY result_column [ASC | DESC] { , ... }]
+SQL-SELECT      
+(3)SQL-SELECT
+
+/SQLOQL
+
+SQLSELECT-FROM-WHEREWHERE
+(collection)
+
+SELECT-FROM-WEHRE
+     FROM
+     SELECT
+     Where
+
+SQL
+SQL
+
+          
+
+       .
+                 
+
+ 
+
+          Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+SQL          
+(1) SQL-
+
+
+ SQL(Table),
+(View)E-C
+
+View
+
+Base Table
+
+    
+      ?
+SQL        
+(1) SQL-
+
+SQL
+
+
+SQL
+
+
+ 
+SQL        
+(2) SQL-
+
+""
+
+
+
+          create view view_name [([] ...)]
+                         as  [with check option]
+
+
+
+with checkoptioninsertupdatedelete
+insert/update/delete
+
+SQL                                              
+(2) SQL-
+
+ CompStud 
+
+Student
+
+Create View CompStud AS
+
+( Select * From Student
+
+Where D# in ( Select D# From Dept
+
+                      Where Dname = `' ) );
+
+TeachTeacher
+
+
+
+Create View Teach AS
+
+( Select T.Tname, C.Cname, Credit            
+    From Teacher T, Course C                 ?
+
+  Where T.T# = C.T# ) ;
+
+                                   
+                                   E-C?
+SQL        
+(3) SQL-
+
+TableSQL
+
+Teach
+
+     Select T.Tname From Teach T
+     Where T.Cname = `' ;
+
+CompStud
+
+     Select * From CompStud;
+
+20CompStud
+
+     Select * From CompStud
+     Where Sage < 20 ;
+
+
+?
+SQL              
+(3) SQL-
+
+ 
+StudStat, 
+
+     Create View StudStat(S#, Sname, AvgS, MinS, MaxS, CNT)
+     as ( Select S#, Sname, AVG(Score), MIN(Score), Max(Score), Count(*)
+
+               From Student S, SC Where S.S# = SC.S#
+             Group by S.S# ) ;
+
+StudStat
+
+     Select Sname, AvgS From StudStat Where Sname = `' ;
+
+          
+             ?
+SQL                                                 
+(4) SQL-
+
+SQL
+
+
+
+
+
+create view S_G(S#, Savg )
+
+  as ( select S#, AVG(Score)
+
+                    from SC group by  S# );
+
+update S_G                                   
+                                                ?
+
+set Savg = 85                                
+where S# = `98030101' ;                         ?
+S_GSC?
+SQL                                            
+(4) SQL-
+
+
+
+      create view ClassStud(Sname, Sclass)
+                   as ( select Sname, Sclass
+                          from Student );
+
+
+      Insert into ClassStud
+      Values ( `', `980301' );
+
+ClassStudStudent?
+S#,S#Student
+SQL        
+(4) SQL-
+
+SQL
+
+ select
+ selectuniquedistinct
+ groupby
+ 
+ 
+ Table
+
+SQL                                                       
+(4) SQL-
+
+SQL
+
+     create view CStud(S#, Sname, Sclass)
+                  as ( select S#, Sname, Sclass
+                          from Student where D# =`03');
+
+ 
+     Insert into CStud
+     Values ( "98030104", "", "980301" );
+
+insert into CStud
+values ("98030104", "", "980301" )
+
+                                  
+
+insert into Student
+values ("98030104", "", Null, Null, "03" , "980301" )
+SQL                       
+(5) SQL-
+ 
+
+
+    Drop View view_name
+
+Teach
+    Drop View Teach;
+
+CompStud
+    Drop View CompStud;
+SQL                       
+(5) SQL-
+
+
+
+
+         Drop Table 
+
+Student
+    Drop Table Student;
+
+Teacher
+    Drop Table Teacher;
+   ?
+
+         
+
+      .
+                
+
+
+
+          Research Center on Intelligent
+    Computing for Enterprises & Services,
+
+          Harbin Institute of Technology
+          ?                                                 
+
+          SQL
+
+                      
+                       
+SELECT ..FROM..
+WHERE ..()            UNION                     UNION ALL
+
+                      EXCEPT             EXCEPT ALL
+
+[NOT] IN  some/  all  INTERSECT INTERSECT ALL
+
+[NOT] EXISTS          FROM R, S  FROM R JOIN S  INNER JOIN
+                                                OUTER JOIN
+
+                              CREATE VIEW
+GROUP BY                       
+
+GROUP BY..HAVING..    ...FROM [view]...
+
