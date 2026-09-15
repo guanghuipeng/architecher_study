@@ -1,5 +1,9 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(grep -n \"^#\\\\{1,4\\\\} \" \"教材知识库/01-系统架构设计师教程/第12章-信息系统架构设计理论与实践.md\")",
+      "Bash(grep -v \"^$\")"
+    ],
     "defaultMode": "bypassPermissions"
   }
 }
